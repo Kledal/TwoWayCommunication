@@ -1,4 +1,4 @@
-gruppe2
+Gruppe 2
 =======
 
-Repository for Group 2
+Repository for Gruppe 2
