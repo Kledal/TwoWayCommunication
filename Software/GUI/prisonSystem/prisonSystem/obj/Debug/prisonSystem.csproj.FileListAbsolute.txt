@@ -8,3 +8,6 @@ C:\Csharp\prisonSystem\prisonSystem\obj\Debug\prisonSystem.csproj.GenerateResour
 C:\Csharp\prisonSystem\prisonSystem\obj\Debug\prisonSystem.exe
 C:\Csharp\prisonSystem\prisonSystem\obj\Debug\prisonSystem.pdb
 C:\Csharp\prisonSystem\prisonSystem\obj\Debug\prisonSystem.loginForm.resources
+C:\Users\Bruger\Documents\GitHub\gruppe2\Software\GUI\prisonSystem\prisonSystem\bin\Debug\prisonSystem.exe.config
+C:\Users\Bruger\Documents\GitHub\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.exe
+C:\Users\Bruger\Documents\GitHub\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.pdb
