@@ -24,20 +24,21 @@ int main(void)
     while(1) {
 		if (counting) {
 			_delay_ms(1000);
-			PORTB = interrupts;
 			counting = 0;
 		}
+		PORTB = ~interrupts;
     }
 }
 
 void InitInterrupt() {
-	MCUCR = 0b00000001;  // INT0:Falling edge
-	GICR |= 0b01000000;  //enable interrupt 0
+	MCUCR = 1<<ISC00 && 1<<ISC11;  // INT0:Falling edge
+	GICR |= 0b11000000;  //enable interrupt 0 AND INT1
 }
 
 ISR(INT0_vect) { //PORT D ben 2
 	//increase countet interrupts
-	interrupts++;
+	if (counting == 1)
+		interrupts++;
 }
 ISR(INT1_vect) { //PORT D ben 3
 	counting = 1; // start counting
