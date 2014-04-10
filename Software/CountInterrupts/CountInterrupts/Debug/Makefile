@@ -35,6 +35,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../serial.c \
 ../CountInterrupts.c
 
 
@@ -45,18 +46,22 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+serial.o \
 CountInterrupts.o
 
 
 OBJS_AS_ARGS +=  \
+serial.o \
 CountInterrupts.o
 
 
 C_DEPS +=  \
+serial.d \
 CountInterrupts.d
 
 
 C_DEPS_AS_ARGS +=  \
+serial.d \
 CountInterrupts.d
 
 
@@ -69,6 +74,8 @@ ADDITIONAL_DEPENDENCIES:=
 OUTPUT_FILE_DEP:= ./makedep.mk
 
 # AVR32/GNU C Compiler
+
+
 
 
 
