@@ -13,6 +13,7 @@ namespace prisonSystem
     public partial class loginForm : Form
     {
         int mode = 0;
+         
 
         public loginForm()
         {
