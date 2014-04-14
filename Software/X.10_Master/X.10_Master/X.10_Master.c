@@ -7,7 +7,6 @@
 
 
 #include <avr/io.h>
-
 /*
  Mode info
  0 = trasmit

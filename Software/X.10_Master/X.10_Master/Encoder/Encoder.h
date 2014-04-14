@@ -9,8 +9,10 @@
 #ifndef ENCODER_H_
 #define ENCODER_H_
 
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
 void sendData();
-
+void initTimer();
 
 #endif /* ENCODER_H_ */
