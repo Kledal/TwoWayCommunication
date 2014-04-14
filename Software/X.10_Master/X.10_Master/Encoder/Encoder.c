@@ -5,21 +5,22 @@
  *  Author: alexander
  */ 
 
-//sendData skal smide 120 kHz ud på ben XXX i 10 ms. 
+//sendData function doing 10 ms 120kHz
 void sendData(void) {
-	//enable ISR for timer 0
-	//delay 10 ms
-	//disable ISR for timer 0
+	TIMSK = (1<<TOIE0);			//enable Timer0 overflow interrupt
+	_delay_ms(1);				//1 ms delay
+	TIMSK = (0<<TOIE0);			//disable Timer0 overflow interrupt
 }
 
 void initTimer0 (void)
 {
- TCNT0 = 240;					//start med at tælle på 255: 255-15=240
- TCCR0 = 0b00000001;			//prescalar 1, normal mode
+ TCNT0 = 240;					//start counting on 240: 255-15=240
+ TCCR0 = 0b00000001;			//no prescaler, normal mode, internal clock
+ 
+ //enable Port X as output
 }
 
 ISR (TIMER0_OVF_vect)
 {
 	//toggler ben XXX
-	TIFR = 0b00000001;
 }

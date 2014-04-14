@@ -11,8 +11,9 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/delay.h>
 
 void sendData();
-void initTimer();
+void initTimer0();
 
 #endif /* ENCODER_H_ */
