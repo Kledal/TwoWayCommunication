@@ -6,9 +6,6 @@
  */ 
 
 
-<<<<<<< HEAD
-#include <avr/io.h>
-=======
 #define F_CPU 3686400UL
 #include <util/delay.h>
 #include <avr/io.h>
@@ -17,7 +14,6 @@
 #include "Encoder/Encoder.h"
 #include "Decoder/Decoder.h"
 
->>>>>>> Added senddata
 /*
  Mode info
  0 = trasmit
