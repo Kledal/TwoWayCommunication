@@ -10,7 +10,7 @@
 #define DECODER_H_
 
 
-int readDataBit();
+unsigned char readDataBit();
 
 
 #endif /* DECODER_H_ */

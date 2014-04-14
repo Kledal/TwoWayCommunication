@@ -12,7 +12,7 @@
 
 void okPw();
 void okLogin();
-int getLoginStatus();
+unsigned char getLoginStatus();
 
 
 #endif /* LOGIN_H_ */
