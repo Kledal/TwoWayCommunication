@@ -1,0 +1,23 @@
+|LoginBoard
+passswitches[0] => Equal0.IN4
+passswitches[0] => Equal1.IN7
+passswitches[1] => Equal0.IN7
+passswitches[1] => Equal1.IN6
+passswitches[2] => Equal0.IN3
+passswitches[2] => Equal1.IN5
+passswitches[3] => Equal0.IN6
+passswitches[3] => Equal1.IN4
+passswitches[4] => Equal0.IN2
+passswitches[4] => Equal1.IN3
+passswitches[5] => Equal0.IN5
+passswitches[5] => Equal1.IN2
+passswitches[6] => Equal0.IN1
+passswitches[6] => Equal1.IN1
+passswitches[7] => Equal0.IN0
+passswitches[7] => Equal1.IN0
+login => okPw.OUTPUTSELECT
+login => okLogin.OUTPUTSELECT
+okPw <= okPw.DB_MAX_OUTPUT_PORT_TYPE
+okLogin <= okLogin.DB_MAX_OUTPUT_PORT_TYPE
+
+
