@@ -65,15 +65,39 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Encoder.c">
+    <Compile Include="Decoder\Decoder.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Encoder.h">
+    <Compile Include="Decoder\Decoder.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Encoder\Encoder.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Encoder\Encoder.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Login\Login.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Login\Login.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Serial\serial.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Serial\serial.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="X.10_Master.c">
       <SubType>compile</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Encoder" />
+    <Folder Include="Decoder" />
+    <Folder Include="Login" />
+    <Folder Include="Serial" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
