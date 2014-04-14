@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>6.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8</ToolchainName>
-    <ProjectGuid>{537223b2-9875-48f2-88d3-be721465ca23}</ProjectGuid>
+    <ProjectGuid>{5d589b68-d09b-4d05-9041-0ed2a60267eb}</ProjectGuid>
     <avrdevice>ATmega32</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>X.10_Master</AssemblyName>
-    <Name>X.10_Master</Name>
-    <RootNamespace>X.10_Master</RootNamespace>
+    <AssemblyName>X.10_Slave</AssemblyName>
+    <Name>X.10_Slave</Name>
+    <RootNamespace>X.10_Slave</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -65,7 +65,7 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="X.10_Master.c">
+    <Compile Include="X.10_Slave.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

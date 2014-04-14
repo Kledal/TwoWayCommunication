@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "X.10_Master", "X.10_Master\X.10_Master.cproj", "{537223B2-9875-48F2-88D3-BE721465CA23}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "X.10_Slave", "X.10_Slave\X.10_Slave.cproj", "{5D589B68-D09B-4D05-9041-0ED2A60267EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|AVR = Release|AVR
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{537223B2-9875-48F2-88D3-BE721465CA23}.Debug|AVR.ActiveCfg = Debug|AVR
-		{537223B2-9875-48F2-88D3-BE721465CA23}.Debug|AVR.Build.0 = Debug|AVR
-		{537223B2-9875-48F2-88D3-BE721465CA23}.Release|AVR.ActiveCfg = Release|AVR
-		{537223B2-9875-48F2-88D3-BE721465CA23}.Release|AVR.Build.0 = Release|AVR
+		{5D589B68-D09B-4D05-9041-0ED2A60267EB}.Debug|AVR.ActiveCfg = Debug|AVR
+		{5D589B68-D09B-4D05-9041-0ED2A60267EB}.Debug|AVR.Build.0 = Debug|AVR
+		{5D589B68-D09B-4D05-9041-0ED2A60267EB}.Release|AVR.ActiveCfg = Release|AVR
+		{5D589B68-D09B-4D05-9041-0ED2A60267EB}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
