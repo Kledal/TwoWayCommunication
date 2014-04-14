@@ -5,6 +5,8 @@
  *  Author: alexander
  */ 
 
+#include "Encoder.h"
+
 //sendData function doing 10 ms 120kHz
 void sendData(void) {
 	TIMSK = (1<<TOIE0);			//enable Timer0 overflow interrupt

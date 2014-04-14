@@ -7,6 +7,6 @@
 
 #include "Decoder.h"
 
-int readDataBit() {
+unsigned char readDataBit() {
 	
 }

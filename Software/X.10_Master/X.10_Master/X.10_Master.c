@@ -33,7 +33,7 @@ unsigned char isSending = 0;
 int main(void)
 {
 	initInterrupts();
-	initTimer();
+	initTimer0();
 	
     while(1)
     {	
