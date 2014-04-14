@@ -1,8 +1,7 @@
 /*
- * Login.h
- *
- * Created: 14-04-2014 13:36:33
- *  Author: alexander
+ * Created: 14-04-2014
+ * Name: Login.h
+ * Version: 0.2
  */ 
 
 
@@ -10,9 +9,9 @@
 #define LOGIN_H_
 
 
-void okPw();
-void okLogin();
-unsigned char getLoginStatus();
+unsigned char okPw( void );
+void okLogin( void );
+unsigned char getLoginStatus( void );
 
 
 #endif /* LOGIN_H_ */
