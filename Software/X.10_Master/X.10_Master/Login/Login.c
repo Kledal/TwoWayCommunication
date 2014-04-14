@@ -6,7 +6,7 @@
  */ 
 
 //default is 0. 0 = not logged in
-int loginStatus = 0;
+unsigned char loginStatus = 0;
 
 void okPw() {
 	
