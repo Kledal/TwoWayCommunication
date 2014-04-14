@@ -5,6 +5,8 @@
  *  Author: alexander
  */ 
 
+#include "Decoder.h"
+
 int readDataBit() {
 	
 }
