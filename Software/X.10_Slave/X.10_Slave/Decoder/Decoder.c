@@ -1,6 +1,6 @@
-#include "Decoder.h"
-#include "Encoder.h"
-#include "Door.h"
+#include "../Decoder/Decoder.h"
+#include "../Encoder/Encoder.h"
+#include "../Door/Door.h"
 #include "../Array_manipulation/Array_manipulation.h"
 
 unsigned char isListening = 0;
@@ -21,20 +21,35 @@ unsigned char statusArray[4] = {1, 1, 1, 1};
 unsigned char aabenStatus[4] = {1, 0, 1, 0};
 unsigned char lukketStatus[4] = {0, 1, 0, 1};
 	
-unsigned char masterAddress[8] = {0, 0, 1, 1, 1, 1, 0, 0}
+unsigned char masterAddress[8] = {0, 0, 1, 1, 1, 1, 0, 0};
 
 void readDataBit() {
 	int i;
 	char loadingBit = 0;
 	
+	/*PORTC = 0b11111000;*/
+	
 	for(i=0;i<100;i++) {
-		char loadingBit |= PINA1;
-		_delay_us(1);
-	}		
+		loadingBit |= PINA1;
+		_delay_us(5);
+	}
+	
+	//DEBUG
+	if (PINA & (1<<PA1)){
+		PORTC = 0b01111111;
+	}else{
+		PORTC = 0b10000000;
+	}
+	PORTC = PINA;
+	//DEBUG
+	
 	
 	if (isLoadingStartArray) {
+		/*PORTC = 0b11110000;*/
 		loadShiftLeft(startbit, loadingBit);
+		//PORTC &= (startbit[0]<<PC0) | (startbit[1]<<PC1) | (startbit[2]<<PC2) | (startbit[3]<<PC3);
 	}
+	
 	
 	//Now we check to see if we need to switch to address array
 	if ((compareArray(startbit, startbits)) == 1) {
@@ -75,6 +90,7 @@ void runCommand() {
 		changeStatus(0);
 	}
 	if (compareArray(cmdbit, statusArray)) {
+		isListening = 0;
 		if (status_ == 1)
 			sendCommand(masterAddress, aabenStatus);
 		if (status_ == 0)

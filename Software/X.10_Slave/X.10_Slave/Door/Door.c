@@ -3,14 +3,14 @@
  * Version 0.1
  */
 
-#include "Door.h"
+#include "../Door/Door.h"
 
 unsigned char status_=0; //Status = 0: closed, status = 1: open
 
 void initDoor ( void )
 {
 	DDRC = 0xFF;		//PORTC set as output
-	PORTC = 0x00;		//Turn off all LEDS
+	PORTC = 0xFF;		//Turn off all LEDS
 	
 	GICR |= (1<<INT2); 	// this enables interrupt 2, INT2 = PB2
 	MCUCSR = (0<<ISC2); // Interrupt on falling edge
@@ -43,7 +43,7 @@ void toggleDoor( void )
 	
 		getStatus();			//Changes status_ to the correct value
 	}
-	else					//opening
+	else						//opening
 	{
 		_delay_ms(375);
 		int i = 0;
