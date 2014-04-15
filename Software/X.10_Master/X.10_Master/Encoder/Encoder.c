@@ -6,6 +6,14 @@
  */ 
 
 #include "Encoder.h"
+#include "../Decoder/Decoder.h"
+
+/*
+ Send variables
+*/
+unsigned char sendInfo[17] = "";
+unsigned char sendCount = 0;
+unsigned char isSending = 0;
 
 //sendData function doing 10 ms 120kHz
 void sendData(void) {
@@ -19,4 +27,24 @@ void initTimer0 (void)
  	OCR0 = 14;				//start counting on 241: 255-14=241
  	TCCR0 = 0b00001001;		//no prescaler, CTC, internal clock, no toggle OC0
  	DDRB |= (1<<PB3);		// Set Port B3 as output
+}
+
+/*
+ This command builds the senddata array and resets the pointer.
+*/
+void sendCommand(char address[8], char cmd[4])
+{
+	for (int i=0;i<sizeof(startbits);i++) {
+		sendInfo[i] = startbits[i];
+	}
+	for (int i=0;i<sizeof(address);i++)
+	{
+		sendInfo[i + sizeof(startbits)] = address[i];
+	}
+	for (int i=0;i<sizeof(cmd);i++)
+	{
+		sendInfo[i + sizeof(address)] = cmd[i];
+	}
+	sendCount = 0;
+	isSending = 1;
 }

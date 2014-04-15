@@ -9,4 +9,7 @@ char ReadChar();
 void SendChar(char Tegn);
 void SendString(char* Streng);
 void SendInteger(int Tal);
+
+extern unsigned char uart_data[17];
+extern int uart_count;
 /**************************************/

@@ -14,6 +14,14 @@
 #include <avr/io.h>
 #include <stdlib.h>
 #include "serial.h"
+#include "../Encoder/Encoder.h"
+#include "../Array_manipulation/Array_manipulation.h"
+
+/*
+ UART variables
+*/
+unsigned char uart_data[17] = "";
+int uart_count = 0;
 
 // Constants
 #define XTAL 3686400  
@@ -131,6 +139,36 @@ void SendInteger(int Tal)
   itoa(Tal, array, 10);
   // - then send the string
   SendString(array);
+}
+
+/*
+ This method is for UART
+*/
+ISR(USART_RXC_vect)
+{
+	char modtaget_tegn;
+	modtaget_tegn = UDR;
+
+	if (modtaget_tegn != 13) {
+		uart_data[uart_count] = modtaget_tegn;
+		uart_count++;
+	}else{
+		clearArray(sendInfo);
+		// Load uart data into sendinfo array.
+		int i;
+  		for(i = 0;i<sizeof(sendInfo);i++) {
+ 			sendInfo[i] = uart_data[i];
+  		}
+		// Output sendinfo to serial.
+		SendString(sendInfo);
+		// Clear uart_data.
+		clearArray(uart_data);
+	
+		uart_count = 0;
+		sendCount = 0;
+		isSending = 1;
+	}
+
 }
 
 /**************************************************/

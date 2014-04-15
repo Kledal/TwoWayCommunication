@@ -12,17 +12,18 @@
 /*
  Listening variables
 */
-unsigned char isListening = 0;
-unsigned char isLoadingStartArray = 0;
-unsigned char isLoadingAddressArray = 0;
-unsigned char isLoadingCmdArray = 0;
-unsigned char messageReady = 0;
-unsigned char arraySizeCounter = 0;
+extern unsigned char isListening;
+extern unsigned char isLoadingStartArray;
+extern unsigned char isLoadingAddressArray;
+extern unsigned char isLoadingCmdArray;
+extern unsigned char messageReady;
+extern unsigned char arraySizeCounter;
 
-unsigned char startbit[4] = "";
-unsigned char addressbit[8] = "";
-unsigned char cmdbit[4] = "";
-unsigned char startbits[4] = {1, 1, 1, 0};
+extern unsigned char startbit[4];
+extern unsigned char addressbit[8];
+extern unsigned char cmdbit[4];
+
+extern unsigned char startbits[4];
 
 
 unsigned char readDataBit();
