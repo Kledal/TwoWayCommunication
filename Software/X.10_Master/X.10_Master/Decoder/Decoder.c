@@ -6,20 +6,23 @@
  */ 
 
 #include "Decoder.h"
+#include "Array Manipulation/Array_manipulation.h"
 
 unsigned char readDataBit() {
+	char loadingBit = PA1;
+	
 	if (isLoadingCheckArray) {
-		// Pseudo: If theres a 120 kHz signal. Add '1' to startCheckArray. Else add '0'
+		loadShiftLeft(startCheckArray, loadingBit);
 	}
 	
 	//Now we check to see if we need to switch to address array
-	if (memcmp(startbits, startCheckArray, sizeof(startbits)) == 0) {
+	if ((compareArray(startCheckArray, startbits)) == 1) {
 		isLoadingCheckArray = 0;
 		isLoadingAddressArray = 1;
 	}
 	
 	if (isLoadingAddressArray) {
-		// Pseudo: If theres a 120 kHz signal. Add '1' to addressbit. Else add '0'
+		loadShiftLeft(addressbit, loadingBit);
 		arraySizeCounter++;
 		
 		if (arraySizeCounter == sizeof(addressbit)) {
@@ -30,7 +33,7 @@ unsigned char readDataBit() {
 	}
 	
 	if (isLoadingCmdArray) {
-		// Pseudo: If theres a 120 kHz signal. Add '1' to addressbit. Else add '0'
+		loadShiftLeft(cmdbit, loadingBit);
 		arraySizeCounter++;
 		
 		if (arraySizeCounter == sizeof(cmdbit)) {
@@ -48,5 +51,5 @@ void runCommand() {
 void resetCheckValues() {
 	isLoadingCheckArray = 1;
 	messageReady = 0;
-	startCheckArray[4] ="";
+	clearArray(startCheckArray);
 }

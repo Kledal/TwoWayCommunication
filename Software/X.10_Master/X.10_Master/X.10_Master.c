@@ -15,6 +15,7 @@
 #include "Encoder/Encoder.h"
 #include "Decoder/Decoder.h"
 #include "Serial/serial.h"
+#include "Array_manipulation/Array_manipulation.h"
 
 /*
  Mode info
@@ -61,7 +62,7 @@ int main(void)
 	InitUART(9600, 8, 1);
 	initInterrupts();
 	initTimer0();
-	
+
 	sei();
     while(1)
     {
@@ -101,10 +102,10 @@ void sendCommand(char address[8], char cmd[4])
 void listening()
 {
 	isListening = 1;
-	
+
 	while(isListening == 1) {
 		// If the address matches the address of this unit, or the public address.
-		if ((messageReady == 1) && ((memcmp(addressbit, myAddressbit, sizeof(addressbit)) == 0) || (memcmp(addressbit, myAddressbit, sizeof(addressbit)) == 0)))  {
+		if ((messageReady == 1) && ((compareArray(addressbit, myAddressbit) == 1) || (compareArray(addressbit, publicAddressbit) == 1)))  {
 			runCommand();
 			resetCommunicationArrays();
 			resetCheckValues();
@@ -125,7 +126,7 @@ void initInterrupts() {
 ISR(INT1_vect) {
 	if (isSending) {
 		unsigned char bit = sendInfo[sendCount];
-		//we need to check against string, because that is what we are receiving over 
+		//we need to check against string, because that is what we are receiving over
 		if (bit == '1'){
 			sendData();
 		}
@@ -145,13 +146,13 @@ ISR(USART_RXC_vect)
 {
 	char modtaget_tegn;
 	modtaget_tegn = UDR;
-	
+
 	if (modtaget_tegn != 13) {
 		uart_data[uart_count] = modtaget_tegn;
 		uart_count++;
 		uart_reading = 1;
 	}else{
-		
+
 		//SendString(uart_data);
   		int i;
   		for(i = 0;i<sizeof(sendInfo);i++) {
@@ -161,17 +162,17 @@ ISR(USART_RXC_vect)
  			sendInfo[i] = uart_data[i];
   		}
 		SendString(sendInfo);
-		
+
 		uart_count = 0;
 		uart_reading = 0;
 		for(i = 0;i<sizeof(uart_data);i++) {
 			uart_data[i] = 0;
 		}
-		
+
 		sendCount = 0;
 		isSending = 1;
 	}
-	
+
 }
 
 /*
