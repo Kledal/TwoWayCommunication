@@ -17,7 +17,6 @@ void sendData(void) {
 void initTimer0 (void)
 {
  	OCR0 = 14;				//start counting on 241: 255-14=241
- 	TCCR0 = 0b00001001;		//no prescaler, CTC, internal clock, toggle OC0
-
- 	DDRB |= (1<<PB3);		// Set Port B as output
+ 	TCCR0 = 0b00001001;		//no prescaler, CTC, internal clock, no toggle OC0
+ 	DDRB |= (1<<PB3);		// Set Port B3 as output
 }
