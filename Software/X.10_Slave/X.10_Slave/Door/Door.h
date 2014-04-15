@@ -3,8 +3,15 @@
  * Version 0.1
  */
 
-void changeStatus( int status );	//from slave to door
+#define F_CPU 3686400UL
+#include <util/delay.h>
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+void initDoor ( void );
+
+void changeStatus( unsigned char status );	//from slave to door
 
 void toggleDoor( void );
 
-int getStatus( void );
+unsigned char getStatus( void );
