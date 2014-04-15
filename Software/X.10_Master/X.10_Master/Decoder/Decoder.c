@@ -32,6 +32,7 @@ unsigned char readDataBit() {
 	if ((compareArray(startbit, startbits)) == 1) {
 		isLoadingStartArray = 0;
 		isLoadingAddressArray = 1;
+		return;
 	}
 	
 	if (isLoadingAddressArray) {
@@ -42,6 +43,7 @@ unsigned char readDataBit() {
 			isLoadingAddressArray = 0;
 			isLoadingCmdArray = 1;
 			arraySizeCounter = 0;
+			return;
 		}
 	}
 	
