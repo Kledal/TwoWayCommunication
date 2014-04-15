@@ -5,18 +5,73 @@
 
 #include "Door.h"
 
-void changeStatus( int status )	//from slave to door
+unsigned char status_=0; //Status = 0: closed, status = 1: open
+
+void initDoor ( void )
 {
+	DDRC = 0xFF;		//PORTC set as output
+	PORTC = 0x00;		//Turn off all LEDS
+	
+	GICR |= (1<<INT2); 	// this enables interrupt 2, INT2 = PB2
+	MCUCSR = (0<<ISC2); // Interrupt on falling edge
+	sei();
+}
+
+void changeStatus( unsigned char status )	//from slave to door
+{
+	if (status != status_)
+	{
+		toggleDoor();
+	}
 	
 }
 
 void toggleDoor( void )
 {
+	unsigned char mask;
 	
+	if (status_ == 1)		//closing
+	{
+		
+		int i = 0;
+		for (i; i<8; i++)
+		{
+			mask = ( 0b11111110 << i);
+			PORTC = PINC & mask;
+			_delay_ms(375);
+		}
+	
+		getStatus();			//Changes status_ to the correct value
+	}
+	else					//opening
+	{
+		_delay_ms(375);
+		int i = 0;
+		for (i; i<8; i++)
+		{
+			mask = ( 0b10000000 >> i);
+			PORTC = PINC | mask;
+			_delay_ms(375);
+		}
+		
+		getStatus();			//Changes status_ to the correct value
+	}
 }
 
-int getStatus( void )
+unsigned char getStatus( void )
 {
-	
-	return status;
+	if( PINC )
+		status_ = 1;
+	else
+		status_ = 0;
+		
+	return status_;
+}
+
+ISR(INT2_vect)		//INT2 = PB2
+{
+	if(status_ == 0)
+	{
+		PORTC = 0b11000000;		//simulates a person forcing the door open.
+	}
 }
