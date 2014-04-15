@@ -6,18 +6,19 @@
  */ 
 
 #include "Decoder.h"
-#include "Array Manipulation/Array_manipulation.h"
+#include "../Array_manipulation/Array_manipulation.h"
+#include <avr/io.h>
 
 unsigned char readDataBit() {
-	char loadingBit = PA1;
+	char loadingBit = PINA1;
 	
-	if (isLoadingCheckArray) {
-		loadShiftLeft(startCheckArray, loadingBit);
+	if (isLoadingStartArray) {
+		loadShiftLeft(startbit, loadingBit);
 	}
 	
 	//Now we check to see if we need to switch to address array
-	if ((compareArray(startCheckArray, startbits)) == 1) {
-		isLoadingCheckArray = 0;
+	if ((compareArray(startbit, startbits)) == 1) {
+		isLoadingStartArray = 0;
 		isLoadingAddressArray = 1;
 	}
 	
@@ -49,7 +50,12 @@ void runCommand() {
 }
 
 void resetCheckValues() {
-	isLoadingCheckArray = 1;
+	isLoadingStartArray = 1;
 	messageReady = 0;
-	clearArray(startCheckArray);
+}
+
+void resetCommunicationArrays() {
+	clearArray(startbit);
+	clearArray(addressbit);
+	clearArray(cmdbit);
 }

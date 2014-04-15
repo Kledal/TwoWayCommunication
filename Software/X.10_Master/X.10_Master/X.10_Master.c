@@ -23,9 +23,9 @@
  1 = receive
 */
 unsigned char mode = 0;
-unsigned char startbit[4] = "";
-unsigned char addressbit[8] = "";
-unsigned char cmdbit[4] = "";
+// unsigned char startbit[4] = "";
+// unsigned char addressbit[8] = "";
+// unsigned char cmdbit[4] = "";
 
 /*
  Properties for this unit
@@ -36,7 +36,7 @@ unsigned char publicAddressbit[8] = {1, 0, 1, 0, 1, 0, 1, 0};
 /*
  Declare startbits
 */
-unsigned char startbits[4] = {1, 1, 1, 0};
+/*unsigned char startbits[4] = {1, 1, 1, 0};*/
 
 /*
  Send variables
@@ -173,14 +173,4 @@ ISR(USART_RXC_vect)
 		isSending = 1;
 	}
 
-}
-
-/*
- Function for resetting arrays
-*/
-void resetCommunicationArrays()
-{
-	startbit[4] = "";
-	addressbit[8] = "";
-	cmdbit[4] = "";
 }

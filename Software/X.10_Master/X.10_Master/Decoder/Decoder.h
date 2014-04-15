@@ -13,16 +13,22 @@
  Listening variables
 */
 unsigned char isListening = 0;
-unsigned char isLoadingCheckArray = 0;
+unsigned char isLoadingStartArray = 0;
 unsigned char isLoadingAddressArray = 0;
 unsigned char isLoadingCmdArray = 0;
 unsigned char messageReady = 0;
 unsigned char arraySizeCounter = 0;
-unsigned char startCheckArray[4] =""; //For listening mode. Checking incoming bits vs. startbit array
+
+unsigned char startbit[4] = "";
+unsigned char addressbit[8] = "";
+unsigned char cmdbit[4] = "";
+unsigned char startbits[4] = {1, 1, 1, 0};
+
 
 unsigned char readDataBit();
 void runCommand();
 void resetCheckValues();
+void resetCommunicationArrays();
 
 
 #endif /* DECODER_H_ */

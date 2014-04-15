@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Array_manipulation\Array_manipulation.c
+
 Decoder\Decoder.c
 
 Encoder\Encoder.c
