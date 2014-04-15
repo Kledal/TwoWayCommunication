@@ -1,54 +1,62 @@
-﻿/* Created: 14-04-2014
- * Name: X.10_Slave.c
- * Version 0.2
- */
-#define F_CPU 3686400UL
+﻿#define F_CPU 3686400UL
 #include <util/delay.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
 #include "Door/Door.h"
+#include "Encoder/Encoder.h"
+#include "Decoder/Decoder.h"
+#include "Array_manipulation/Array_manipulation.h"
 
 /*
-Mode info:
-0 = transmit
-1 = receive
-Default mode = receive
+ Define main.c functions
 */
-unsigned char mode = 1;
+void initInterrupts();
 
 /*
-declare comparable arrays
+ Properties for this unit
 */
-unsigned char startbit[ 4 ] = { 0 };
-unsigned char addressbit[ 8 ] = { 0 };
-unsigned char cmdbit[ 4 ] = { 0 };
-
-/*
-declare startbits
-*/
-unsigned char startbits[ 4 ] = { 1 1 1 0 };
-
-/*
-Transmit variables
-*/
-unsigned char sendInfo[ 16 ] = { 0 };
-unsigned char sendCount = 0;
-unsigned char isSending = 0;
-
-
-//void changeStatus( int status );	//change this
+unsigned char myAddressbit[8] = {1, 1, 0, 0, 1, 1, 0, 0};
+unsigned char publicAddressbit[8] = {1, 0, 1, 0, 1, 0, 1, 0};
 
 int main(void)
 {
-	// for mode: transmit = 0, receive = 1
-	int mode = 1;				// slave default mode = 1
-	int startbit[4] = {1110};	// startbits
-	int addressbit[8] = {0};	// !!!!!!! ???? address for master?
-	int cmdbit[4] = { 0 };		// commandbits
-
+	initInterrupts();
+	initTimer0();
+	sei();
+	
     while(1)
     {
-
+		if ((messageReady == 1) && ((compareArray(addressbit, myAddressbit) == 1) || (compareArray(addressbit, publicAddressbit) == 1)))  {
+			runCommand();
+			resetCommunicationArrays();
+			resetCheckValues();
+		}
     }
+}
+
+void initInterrupts() {
+	// this enables interrupt 2. Which triggers on rising & falling.
+	// Enables interrupt 0 for the encoder
+	GICR |= (1<<INT1);
+	MCUCR = (1<<ISC10) | (0<<ISC00); // Interrupt on rising and falling edge
+}
+
+/*
+ This method is for the zero cross detection.
+*/
+ISR(INT1_vect) {
+	sendData();
+	if (isSending) {
+		unsigned char bit = sendInfo[sendCount];
+		//we need to check against string, because that is what we are receiving over
+		if (bit == '1')
+			sendData();
+
+		sendCount++;
+		if (sendCount > sizeof(sendInfo))
+			isSending = 0;
+	}
+	if (isListening)
+		readDataBit();
 }

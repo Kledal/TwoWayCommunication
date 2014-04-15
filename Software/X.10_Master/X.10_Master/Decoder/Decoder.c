@@ -1,13 +1,5 @@
-/*
- * Decoder.c
- *
- * Created: 14-04-2014 13:36:13
- *  Author: alexander
- */ 
-
 #include "Decoder.h"
 #include "../Array_manipulation/Array_manipulation.h"
-#include <avr/io.h>
 
 unsigned char isListening = 0;
 unsigned char isLoadingStartArray = 0;
@@ -21,8 +13,14 @@ unsigned char addressbit[8] = "";
 unsigned char cmdbit[4] = "";
 unsigned char startbits[4] = {1, 1, 1, 0};
 
-unsigned char readDataBit() {
-	char loadingBit = PINA1;
+void readDataBit() {
+	int i;
+	char loadingBit = 0;
+	
+	for(i=0;i<100;i++) {
+		char loadingBit |= PINA1;
+		_delay_us(1);
+	}		
 	
 	if (isLoadingStartArray) {
 		loadShiftLeft(startbit, loadingBit);

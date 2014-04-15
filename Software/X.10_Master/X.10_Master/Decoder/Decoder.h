@@ -1,13 +1,9 @@
-/*
- * Decoder.h
- *
- * Created: 14-04-2014 13:36:21
- *  Author: alexander
- */ 
-
-
 #ifndef DECODER_H_
 #define DECODER_H_
+
+#define F_CPU 3686400UL
+#include <util/delay.h>
+#include <avr/io.h>
 
 /*
  Listening variables
@@ -26,7 +22,7 @@ extern unsigned char cmdbit[4];
 extern unsigned char startbits[4];
 
 
-unsigned char readDataBit();
+void readDataBit();
 void runCommand();
 void resetCheckValues();
 void resetCommunicationArrays();

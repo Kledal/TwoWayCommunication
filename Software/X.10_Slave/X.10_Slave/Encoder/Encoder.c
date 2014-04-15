@@ -23,7 +23,6 @@ void initTimer0 (void)
  	DDRB |= (1<<PB3);		// Set Port B3 as output
 }
 
-
 /*
  This command builds the senddata array and resets the pointer.
 */

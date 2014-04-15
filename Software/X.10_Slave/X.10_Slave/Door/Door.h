@@ -8,6 +8,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+extern unsigned char status_;
+
 void initDoor ( void );
 
 void changeStatus( unsigned char status );	//from slave to door

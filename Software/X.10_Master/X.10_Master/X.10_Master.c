@@ -1,12 +1,4 @@
-﻿/*
- * X.c
- *
- * Created: 14-04-2014 13:23:30
- *  Author: Projekt gruppe 2
- */
-
-
-#define F_CPU 3686400UL
+﻿#define F_CPU 3686400UL
 #include <util/delay.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -17,27 +9,23 @@
 #include "Array_manipulation/Array_manipulation.h"
 
 /*
+ Define main.c functions
+*/
+void initInterrupts();
+
+/*
  Properties for this unit
 */
 unsigned char myAddressbit[8] = {0, 0, 1, 1, 1, 1, 0, 0};
 unsigned char publicAddressbit[8] = {1, 0, 1, 0, 1, 0, 1, 0};
-
-/*
- Declare startbits
-*/
-
-/*
- Define main.c functions
-*/
-void initInterrupts();
 
 int main(void)
 {
 	InitUART(9600, 8, 1);
 	initInterrupts();
 	initTimer0();
-
 	sei();
+	
     while(1)
     {
 		// Not logged in, lets check -- *** needs to be a while loop in a while loop ***
@@ -49,11 +37,10 @@ int main(void)
 		 We are logged in, lets process new data.
 		*/
 		if (getLoginStatus()) {
-
+			SendString("k");	//Communicates to that ATMega is ready to send data
 		}
     }
 }
-
 
 void listening()
 {

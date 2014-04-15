@@ -20,7 +20,7 @@
     <OverrideVtor>false</OverrideVtor>
     <OverrideVtorValue />
     <eraseonlaunchrule>0</eraseonlaunchrule>
-    <AsfVersion>3.1.3</AsfVersion>
+    <AsfVersion>2.11.1</AsfVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -65,10 +65,28 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Array_manipulation\Array_manipulation.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Array_manipulation\Array_manipulation.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Decoder\Decoder.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Decoder\Decoder.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Door\Door.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Door\Door.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Encoder\Encoder.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Encoder\Encoder.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="X.10_Slave.c">
@@ -77,6 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Door" />
+    <Folder Include="Array_manipulation" />
+    <Folder Include="Encoder" />
+    <Folder Include="Decoder" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
