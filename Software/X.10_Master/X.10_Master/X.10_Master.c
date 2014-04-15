@@ -3,7 +3,7 @@
  *
  * Created: 14-04-2014 13:23:30
  *  Author: Projekt gruppe 2
- */ 
+ */
 
 
 #define F_CPU 3686400UL
@@ -20,34 +20,47 @@
  1 = receive
 */
 unsigned char mode = 0;
-unsigned char startbit[4];
-unsigned char addressbit[8];
-unsigned char cmdbit[4];
+unsigned char startbit[4] = "";
+unsigned char addressbit[8] = "";
+unsigned char cmdbit[4] = "";
 
+/*
+ Declare startbits
+*/
 unsigned char startbits[4] = {1, 1, 1, 0};
 
-unsigned char sendInfo[16];
+/*
+ Send variables
+*/
+unsigned char *sendInfo[16] = "";
 unsigned char sendCount = 0;
 unsigned char isSending = 0;
+
+/*
+ UART variables
+*/
+char *uart_data[12] = "";
+int uart_count = 0;
+unsigned char uart_reading = 1;
 
 int main(void)
 {
 	initInterrupts();
 	initTimer0();
-	
+
     while(1)
-    {	
+    {
 		// Not logged in, lets check
 		// if the DE-2 is outputting
 		if (!getLoginStatus()) {
-			
+
 		}
 		/*
 		 We are logged in, lets process new data.
 		*/
 		if (getLoginStatus()) {
-				
-		}				
+
+		}
     }
 }
 /*
@@ -80,7 +93,7 @@ void initInterrupts() {
 /*
  This method is for the zero cross detection.
 */
-ISR(INT1_vect) { 
+ISR(INT1_vect) {
 	if (isSending) {
 		unsigned char bit = sendInfo[sendCount];
 		if (bit){
@@ -99,4 +112,12 @@ ISR (USART_RXC_vect)
 {
 	char modtaget_tegn;
 	modtaget_tegn = UDR;
+	if (modtaget_tegn != 13) {
+		uart_data[uart_count] = modtaget_tegn;
+		uart_count++;
+		uart_reading = 1;
+	}else{
+		uart_count = 0;
+		uart_reading = 0;
+	}
 }
