@@ -16,17 +16,17 @@
 
 /*
  Mode info
- 0 = trasmit
+ 0 = transmit
  1 = receive
 */
 unsigned char mode = 0;
-unsigned char *startbit[4];
-unsigned char *addressbit[4];
-unsigned char *cmdbit[4];
+unsigned char startbit[4];
+unsigned char addressbit[8];
+unsigned char cmdbit[4];
 
-unsigned char *startbits[4] = {1, 1, 0, 1};
+unsigned char startbits[4] = {1, 1, 1, 0};
 
-unsigned char *sendInfo[16];
+unsigned char sendInfo[16];
 unsigned char sendCount = 0;
 unsigned char isSending = 0;
 
@@ -71,14 +71,16 @@ void sendCommand(char address[8], char cmd[4])
 }
 
 void initInterrupts() {
-	// this enables interrupts 2. Which triggers on rising & falling.
-	GICR |= (1<<INT2);
+	// this enables interrupt 2. Which triggers on rising & falling.
+	// Enables interrupt 0 for the encoder
+	GICR |= (1<<INT1);
+	MCUCR = (1<<ISC10); // Interrupt on rising and falling edge
 }
 
 /*
  This method is for the zero cross detection.
 */
-ISR(INT2_vect) { 
+ISR(INT1_vect) { 
 	if (isSending) {
 		unsigned char bit = sendInfo[sendCount];
 		if (bit){
