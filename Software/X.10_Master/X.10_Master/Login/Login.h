@@ -8,6 +8,7 @@
 #ifndef LOGIN_H_
 #define LOGIN_H_
 
+#include <avr/io.h>
 
 unsigned char okPw( void );
 void okLogin( void );

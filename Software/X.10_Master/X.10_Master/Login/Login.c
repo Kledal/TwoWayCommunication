@@ -3,6 +3,7 @@
  * Name: Login.c
  * Version: 0.2
  */ 
+#include "Login.h"
 
 //default is 0. 0 = not logged in
 unsigned char loginStatus = 0;
@@ -19,7 +20,7 @@ void okLogin( void )
 	//Reads PA2
 	loginStatus = ( PINA & 0b00000100 );	//loginStatus = 1 if PA2 = high.
 }
-int getLoginStatus( void ) 
+unsigned char getLoginStatus( void ) 
 {
 	return loginStatus;
 }
