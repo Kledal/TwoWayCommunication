@@ -10,10 +10,12 @@
 #include <util/delay.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/string.h> // For comparing arrays
 #include "Login/Login.h"
 #include "Encoder/Encoder.h"
 #include "Decoder/Decoder.h"
 #include "Serial/serial.h"
+#include "Array_manipulation/Array_manipulation.h"
 
 /*
  Mode info
@@ -21,14 +23,20 @@
  1 = receive
 */
 unsigned char mode = 0;
-unsigned char startbit[4] = "";
-unsigned char addressbit[8] = "";
-unsigned char cmdbit[4] = "";
+// unsigned char startbit[4] = "";
+// unsigned char addressbit[8] = "";
+// unsigned char cmdbit[4] = "";
+
+/*
+ Properties for this unit
+*/
+unsigned char myAddressbit[8] = {0, 0, 1, 1, 1, 1, 0, 0};
+unsigned char publicAddressbit[8] = {1, 0, 1, 0, 1, 0, 1, 0};
 
 /*
  Declare startbits
 */
-unsigned char startbits[4] = {1, 1, 1, 0};
+/*unsigned char startbits[4] = {1, 1, 1, 0};*/
 
 /*
  Send variables
@@ -54,7 +62,7 @@ int main(void)
 	InitUART(9600, 8, 1);
 	initInterrupts();
 	initTimer0();
-	
+
 	sei();
     while(1)
     {
@@ -91,6 +99,20 @@ void sendCommand(char address[8], char cmd[4])
 	isSending = 1;
 }
 
+void listening()
+{
+	isListening = 1;
+
+	while(isListening == 1) {
+		// If the address matches the address of this unit, or the public address.
+		if ((messageReady == 1) && ((compareArray(addressbit, myAddressbit) == 1) || (compareArray(addressbit, publicAddressbit) == 1)))  {
+			runCommand();
+			resetCommunicationArrays();
+			resetCheckValues();
+		}
+	}
+}
+
 void initInterrupts() {
 	// this enables interrupt 2. Which triggers on rising & falling.
 	// Enables interrupt 0 for the encoder
@@ -104,7 +126,7 @@ void initInterrupts() {
 ISR(INT1_vect) {
 	if (isSending) {
 		unsigned char bit = sendInfo[sendCount];
-		//we need to check against string, because that is what we are receiving over 
+		//we need to check against string, because that is what we are receiving over
 		if (bit == '1'){
 			sendData();
 		}
@@ -112,6 +134,9 @@ ISR(INT1_vect) {
 		if (sendCount > sizeof(sendInfo))
 			isSending = 0;
 	}
+	if (isListening) {
+		readDataBit();
+	} // End if (isListening)
 }
 
 /*
@@ -121,13 +146,13 @@ ISR(USART_RXC_vect)
 {
 	char modtaget_tegn;
 	modtaget_tegn = UDR;
-	
+
 	if (modtaget_tegn != 13) {
 		uart_data[uart_count] = modtaget_tegn;
 		uart_count++;
 		uart_reading = 1;
 	}else{
-		
+
 		//SendString(uart_data);
   		int i;
   		for(i = 0;i<sizeof(sendInfo);i++) {
@@ -137,15 +162,15 @@ ISR(USART_RXC_vect)
  			sendInfo[i] = uart_data[i];
   		}
 		SendString(sendInfo);
-		
+
 		uart_count = 0;
 		uart_reading = 0;
 		for(i = 0;i<sizeof(uart_data);i++) {
 			uart_data[i] = 0;
 		}
-		
+
 		sendCount = 0;
 		isSending = 1;
 	}
-	
+
 }

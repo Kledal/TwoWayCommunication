@@ -65,6 +65,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Array_manipulation\Array_manipulation.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Array_manipulation\Array_manipulation.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Decoder\Decoder.c">
       <SubType>compile</SubType>
     </Compile>
@@ -97,6 +103,7 @@
     <Folder Include="Encoder" />
     <Folder Include="Decoder" />
     <Folder Include="Login" />
+    <Folder Include="Array_manipulation" />
     <Folder Include="Serial" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
