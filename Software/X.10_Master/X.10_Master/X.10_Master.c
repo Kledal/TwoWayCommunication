@@ -17,16 +17,6 @@
 #include "Array_manipulation/Array_manipulation.h"
 
 /*
- Mode info
- 0 = transmit
- 1 = receive
-*/
-unsigned char mode = 0;
-// unsigned char startbit[4] = "";
-// unsigned char addressbit[8] = "";
-// unsigned char cmdbit[4] = "";
-
-/*
  Properties for this unit
 */
 unsigned char myAddressbit[8] = {0, 0, 1, 1, 1, 1, 0, 0};
@@ -94,14 +84,13 @@ ISR(INT1_vect) {
 	if (isSending) {
 		unsigned char bit = sendInfo[sendCount];
 		//we need to check against string, because that is what we are receiving over
-		if (bit == '1'){
+		if (bit == '1')
 			sendData();
-		}
+
 		sendCount++;
 		if (sendCount > sizeof(sendInfo))
 			isSending = 0;
 	}
-	if (isListening) {
+	if (isListening)
 		readDataBit();
-	} // End if (isListening)
 }
