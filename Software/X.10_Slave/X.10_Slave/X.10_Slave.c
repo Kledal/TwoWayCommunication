@@ -14,10 +14,8 @@
 void initInterrupts();
 
 /*
- Properties for this unit
+ Properties for this unit is now in Decoder
 */
-unsigned char myAddressbit[8] = {1, 1, 0, 0, 1, 1, 0, 0};
-unsigned char publicAddressbit[8] = {1, 0, 1, 0, 1, 0, 1, 0};
 
 int main(void)
 {
@@ -28,20 +26,13 @@ int main(void)
 	
 	DDRD = 0x00;
 	DDRA = 0x00;
-	/*PORTC = 0b11111110;*/
-	
-	isLoadingStartArray = 1;
-	isListening = 1;
+
+	setIsLoadingStartArray(1);
+	setListening(1);
 	
     while(1)
     {
-		
-	/*	PORTC = 0b11111100;*/
-		if ((messageReady == 1) && ((compareArray(addressbit, myAddressbit) == 1) || (compareArray(addressbit, publicAddressbit) == 1)))  {
-			runCommand();
-			resetCommunicationArrays();
-			resetCheckValues();
-		}
+		checkSendMessage();
     }
 }
 
@@ -56,18 +47,9 @@ void initInterrupts() {
  This method is for the zero cross detection.
 */
 ISR(INT1_vect) {
-	if (isSending) {
-		unsigned char bit = sendInfo[sendCount];
-		//we need to check against string, because that is what we are receiving over
-		if (bit == '1')
-			sendData();
-
-		sendCount++;
-		if (sendCount > sizeof(sendInfo))
-			isSending = 0;
-	}
-	if (isListening)
-	{
-		readDataBit();
-	}		
+	if (getSendingStatus() == 1)
+		sendDataBit();
+		
+	if (getListening() == 1)
+		readDataBit();	
 }

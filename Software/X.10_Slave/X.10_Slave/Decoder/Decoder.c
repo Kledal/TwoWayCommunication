@@ -3,6 +3,7 @@
 #include "../Door/Door.h"
 #include "../Array_manipulation/Array_manipulation.h"
 
+// Listening variables
 unsigned char isListening = 0;
 unsigned char isLoadingStartArray = 0;
 unsigned char isLoadingAddressArray = 0;
@@ -10,18 +11,27 @@ unsigned char isLoadingCmdArray = 0;
 unsigned char messageReady = 0;
 unsigned char arraySizeCounter = 0;
 
+// Loading arrays
 unsigned char startbit[4] = "";
 unsigned char addressbit[8] = "";
 unsigned char cmdbit[4] = "";
 unsigned char startbits[4] = {1, 1, 1, 0};
+	
+// Command arrays
 unsigned char aabenArray[4] = {0, 1, 0, 1};
 unsigned char lukArray[4] = {0, 1, 1, 1};
 unsigned char statusArray[4] = {1, 1, 1, 1};
-	
+
+// Sequence arrays for sending status to master
 unsigned char aabenStatus[4] = {1, 0, 1, 0};
 unsigned char lukketStatus[4] = {0, 1, 0, 1};
-	
+
+// Address for master unit
 unsigned char masterAddress[8] = {0, 0, 1, 1, 1, 1, 0, 0};
+
+// Properties for this unit
+unsigned char myAddressbit[8] = {1, 1, 0, 0, 1, 1, 0, 0};
+unsigned char publicAddressbit[8] = {1, 0, 1, 0, 1, 0, 1, 0};
 
 void readDataBit() {
 	int i;
@@ -91,9 +101,9 @@ void runCommand() {
 	}
 	if (compareArray(cmdbit, statusArray)) {
 		isListening = 0;
-		if (status_ == 1)
+		if (getStatus() == 1)
 			sendCommand(masterAddress, aabenStatus);
-		if (status_ == 0)
+		if (getStatus() == 0)
 			sendCommand(masterAddress, lukketStatus);
 	}
 }
@@ -107,4 +117,24 @@ void resetCommunicationArrays() {
 	clearArray(startbit);
 	clearArray(addressbit);
 	clearArray(cmdbit);
+}
+
+void setListening(char sat) {
+	isListening = sat;
+}
+
+char getListening() {
+	return isListening;
+}
+
+void checkSendMessage() {
+	if ((messageReady == 1) && ((compareArray(addressbit, myAddressbit) == 1) || (compareArray(addressbit, publicAddressbit) == 1)))  {
+		runCommand();
+		resetCommunicationArrays();
+		resetCheckValues();
+	}
+}
+
+void setIsLoadingStartArray(char set) {
+	isLoadingStartArray = set;
 }

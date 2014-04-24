@@ -7,6 +7,7 @@
 unsigned char sendInfo[17] = "";
 unsigned char sendCount = 0;
 unsigned char isSending = 0;
+unsigned char startSequence[4] = {1, 1, 1, 0};
 
 
 //sendData function doing 10 ms 120kHz
@@ -28,12 +29,12 @@ void initTimer0 (void)
 */
 void sendCommand(char address[8], char cmd[4])
 {
-	for (int i=0;i<sizeof(startbits);i++) {
-		sendInfo[i] = startbits[i];
+	for (int i=0;i<sizeof(startSequence);i++) {
+		sendInfo[i] = startSequence[i];
 	}
 	for (int i=0;i<sizeof(address);i++)
 	{
-		sendInfo[i + sizeof(startbits)] = address[i];
+		sendInfo[i + sizeof(startSequence)] = address[i];
 	}
 	for (int i=0;i<sizeof(cmd);i++)
 	{
@@ -41,4 +42,19 @@ void sendCommand(char address[8], char cmd[4])
 	}
 	sendCount = 0;
 	isSending = 1;
+}
+
+char getSendingStatus() {
+	return isSending;
+}
+
+void sendDataBit() {
+	unsigned char bit = sendInfo[sendCount];
+	//we need to check against string, because that is what we are receiving over
+	if (bit == '1')
+	sendData();
+
+	sendCount++;
+	if (sendCount > sizeof(sendInfo))
+	isSending = 0;
 }

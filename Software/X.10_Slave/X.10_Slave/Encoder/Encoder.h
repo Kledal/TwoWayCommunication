@@ -1,10 +1,3 @@
-/*
- * Encoder.h
- *
- * Created: 14-04-2014 13:35:55
- *  Author: alexander
- */ 
-
 
 #ifndef ENCODER_H_
 #define ENCODER_H_
@@ -17,12 +10,12 @@
 void sendData();
 void initTimer0();
 void sendCommand();
+char getSendingStatus();
+void sendDataBit();
 
-/*
- Send variables
-*/
-extern unsigned char sendInfo[17];
-extern unsigned char sendCount;
-extern unsigned char isSending;
+unsigned char sendInfo[17];
+unsigned char sendCount;
+unsigned char isSending;
+unsigned char startSequence[4];
 
-#endif /* ENCODER_H_ */
+#endif

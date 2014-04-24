@@ -1,6 +1,5 @@
 
 #include "Array_manipulation.h"
-#include "../Decoder/Decoder.h"
 
 void clearArray(unsigned char *arrayRef) {
 	int i;
@@ -14,7 +13,6 @@ void loadShiftLeft(unsigned char *arrayRef, char data) {
 		arrayRef[i] = arrayRef[i+1];
 
 	arrayRef[i] = data;
-/*	PORTC = 0b11100000;*/
 }
 
 char compareArray(unsigned char *arrayRef, unsigned char *arrayRef2) {

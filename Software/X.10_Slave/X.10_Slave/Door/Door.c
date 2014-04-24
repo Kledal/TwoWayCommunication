@@ -5,7 +5,7 @@
 
 #include "../Door/Door.h"
 
-unsigned char status_=0; //Status = 0: closed, status = 1: open
+unsigned char status_= 0; //Status = 0: closed, status = 1: open
 
 void initDoor ( void )
 {
