@@ -4,8 +4,8 @@
 #include "../Array_manipulation/Array_manipulation.h"
 
 // Listening variables
-unsigned char isListening = 0;
-unsigned char isLoadingStartArray = 0;
+unsigned char isListening = 1;
+unsigned char isLoadingStartArray = 1;
 unsigned char isLoadingAddressArray = 0;
 unsigned char isLoadingCmdArray = 0;
 unsigned char messageReady = 0;
@@ -37,59 +37,58 @@ void readDataBit() {
 	int i;
 	char loadingBit = 0;
 	
-	/*PORTC = 0b11111000;*/
-	
+	// We wait 100*5 us for input on PINA1. If, at any point, we measure 5V, our loadingBit equals 1
 	for(i=0;i<100;i++) {
 		loadingBit |= PINA1;
 		_delay_us(5);
 	}
 	
-	//DEBUG
-	if (PINA & (1<<PA1)){
-		PORTC = 0b01111111;
-	}else{
-		PORTC = 0b10000000;
-	}
-	PORTC = PINA;
-	//DEBUG
-	
-	
 	if (isLoadingStartArray) {
-		/*PORTC = 0b11110000;*/
 		loadShiftLeft(startbit, loadingBit);
-		//PORTC &= (startbit[0]<<PC0) | (startbit[1]<<PC1) | (startbit[2]<<PC2) | (startbit[3]<<PC3);
-	}
-	
-	
-	//Now we check to see if we need to switch to address array
-	if ((compareArray(startbit, startbits)) == 1) {
-		isLoadingStartArray = 0;
-		isLoadingAddressArray = 1;
-		return;
 	}
 	
 	if (isLoadingAddressArray) {
 		loadShiftLeft(addressbit, loadingBit);
 		arraySizeCounter++;
+	}		
+	
+	if (isLoadingCmdArray) {
+		loadShiftLeft(cmdbit, loadingBit);
+		arraySizeCounter++;
+	}	
 		
+	// We check to see if we need to switch to address array
+	checkArrayStatus();
+	
+	// We check to see if a message is ready. And if its for this unit. If so, we run the command
+	checkSendMessage();	
+}
+
+void checkArrayStatus() {
+	if (isLoadingStartArray) {
+		if ((compareArray(startbit, startbits)) == 1) {
+			isLoadingStartArray = 0;
+			isLoadingAddressArray = 1;
+			return;
+		}	
+	}	
+	
+	if (isLoadingAddressArray) {
 		if (arraySizeCounter == sizeof(addressbit)) {
 			isLoadingAddressArray = 0;
 			isLoadingCmdArray = 1;
 			arraySizeCounter = 0;
 			return;
-		}
+		}			
 	}
 	
-	if (isLoadingCmdArray) {
-		loadShiftLeft(cmdbit, loadingBit);
-		arraySizeCounter++;
-		
+	if(isLoadingCmdArray) {	
 		if (arraySizeCounter == sizeof(cmdbit)) {
 			isLoadingCmdArray = 0;
 			arraySizeCounter = 0;
 			messageReady = 1;
 		}
-	}		
+	}	
 }
 
 void runCommand() {
@@ -119,10 +118,6 @@ void resetCommunicationArrays() {
 	clearArray(cmdbit);
 }
 
-void setListening(char sat) {
-	isListening = sat;
-}
-
 char getListening() {
 	return isListening;
 }
@@ -133,8 +128,4 @@ void checkSendMessage() {
 		resetCommunicationArrays();
 		resetCheckValues();
 	}
-}
-
-void setIsLoadingStartArray(char set) {
-	isLoadingStartArray = set;
 }

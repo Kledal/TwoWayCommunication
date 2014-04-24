@@ -1,4 +1,4 @@
-ï»¿#define F_CPU 3686400UL
+#define F_CPU 3686400UL
 #include <util/delay.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -7,6 +7,7 @@
 #include "Encoder/Encoder.h"
 #include "Decoder/Decoder.h"
 #include "Array_manipulation/Array_manipulation.h"
+#include "Serial/serial.h"
 
 /*
  Define main.c functions
@@ -30,9 +31,19 @@ int main(void)
 	
     while(1)
     {
-		// Slaves always boot into listening mode
-		// In this while(1) loop we wait for interrupts
-		// The Decoder handles when this unit is allowed to send
+		/*
+			Ideen med denne alternative "debugging" mainfunktion er
+			at sætte en switch (SW1) til at være vores "zero" interrupt og
+			sætte en anden switch (SW2) til at være vores data input. Så når
+			man trykker SW1 ind går den ind i vores interrupt i bunden af denne fil.
+			Der aflæser den på SW2. Hvis SW2 er trykket ind læser den 1. Hvis den ikke er
+			læser den 0.
+			Hver gang den har  aflæst et bit skal den udskrive nogle informationer
+			til konsollen. Disse informationer kunne være:
+				- Indholdet af alle arrays
+				- Antallet af registerede interrupts
+				- Andre variabler
+		*/
     }
 }
 

@@ -52,9 +52,9 @@ void sendDataBit() {
 	unsigned char bit = sendInfo[sendCount];
 	//we need to check against string, because that is what we are receiving over
 	if (bit == '1')
-	sendData();
+		sendData();
 
 	sendCount++;
 	if (sendCount > sizeof(sendInfo))
-	isSending = 0;
+		isSending = 0;
 }

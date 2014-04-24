@@ -22,9 +22,11 @@ void readDataBit();
 void runCommand();
 void resetCheckValues();
 void resetCommunicationArrays();
-void setListening(char);
 char getListening();
 void checkSendMessage();
-void setIsLoadingStartArray(char);
+void loadStartArray();
+void loadAddressArray();
+void loadCommandArray();
+void checkArrayStatus();
 
 #endif

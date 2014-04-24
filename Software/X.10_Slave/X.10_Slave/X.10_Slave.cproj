@@ -71,6 +71,9 @@
     <Compile Include="Array_manipulation\Array_manipulation.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Debugging.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Decoder\Decoder.c">
       <SubType>compile</SubType>
     </Compile>
@@ -89,6 +92,12 @@
     <Compile Include="Encoder\Encoder.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Serial\serial.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Serial\serial.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="X.10_Slave.c">
       <SubType>compile</SubType>
     </Compile>
@@ -98,6 +107,7 @@
     <Folder Include="Array_manipulation" />
     <Folder Include="Encoder" />
     <Folder Include="Decoder" />
+    <Folder Include="Serial" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
