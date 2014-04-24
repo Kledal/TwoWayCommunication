@@ -11,10 +11,6 @@ void initDoor ( void )
 {
 	DDRC = 0xFF;		//PORTC set as output
 	PORTC = 0xFF;		//Turn off all LEDS
-	
-	GICR |= (1<<INT2); 	// this enables interrupt 2, INT2 = PB2
-	MCUCSR = (0<<ISC2); // Interrupt on falling edge
-	sei();
 }
 
 void changeStatus( unsigned char status )	//from slave to door

@@ -13,9 +13,28 @@
  Define main.c functions
 */
 void initInterrupts();
+void serialStatus();
 
 /*
- Properties for this unit is now in Decoder
+	Debugging strings 
+*/
+char systemStatus[] = "--- System Status ---";
+char startArray[] = "Start array:";
+char adresseArray[] = "Adresse array:";
+char commandoArray[] = "Kommando array:";
+
+/*
+	IO Mapping:
+		- PORT A - Input
+			- PA1 - Data input
+				-SW1 i debugging mode
+		- PORT B - Input
+			- PB2 - INT2 (Dør interrupt)
+				- SW7
+		- PORT C - LED Output
+		- PORT D - Input
+			- PD3 - INT1 (Zero interrupt)
+				- SW0 i debugging mode
 */
 
 int main(void)
@@ -48,10 +67,11 @@ int main(void)
 }
 
 void initInterrupts() {
-	// this enables interrupt 2. Which triggers on rising & falling.
+	// this enables interrupt 1. Which triggers on rising & falling.
 	// Enables interrupt 0 for the encoder
-	GICR |= (1<<INT1);
-	MCUCR = (1<<ISC10) | (0<<ISC00); // Interrupt on rising and falling edge
+	GICR |= (1<<INT1) | (1<<INT2);
+	MCUCR = 0b00001000; // In debugging mode this only interrupts on falling edge. Normal mode: Interrupt INT 1 on rising and falling edge.
+	MCUCSR = (0<<ISC2); // Interrupt INT 2 on falling edge
 }
 
 /*
@@ -63,4 +83,35 @@ ISR(INT1_vect) {
 		
 	if (getListening() == 1)
 		readDataBit();	
+	
+	serialStatus();
 }
+
+void serialStatus() {
+	int i;
+	
+	SendString(systemStatus);
+	//Pseudo: Indsæt linjeskift
+	SendString(startArray);
+	for (i=0; i<= sizeof(startbit); i++) {
+		SendChar(' ');
+		SendChar(startbit[i]);
+		SendChar(',');
+	}
+	//Pseudo: Indsæt linjeskift
+	SendString(adresseArray);
+	for (i=0; i<= sizeof(addressbit); i++) {
+		SendChar(' ');
+		SendChar(addressbit[i]);
+		SendChar(',');
+	}
+	//Pseudo: Indsæt linjeskift
+	SendString(commandoArray);
+	for (i=0; i<= sizeof(cmdbit); i++) {
+		SendChar(' ');
+		SendChar(cmdbit[i]);
+		SendChar(',');
+	}	
+	//Pseudo: Indsæt linjeskift
+}
+
