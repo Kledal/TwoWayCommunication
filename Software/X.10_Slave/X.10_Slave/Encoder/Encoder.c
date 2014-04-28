@@ -57,4 +57,6 @@ void sendDataBit() {
 	sendCount++;
 	if (sendCount > sizeof(sendInfo))
 		isSending = 0;
+	
+	
 }

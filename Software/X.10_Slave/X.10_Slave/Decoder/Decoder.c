@@ -8,7 +8,6 @@ unsigned char isListening = 1;
 unsigned char isLoadingStartArray = 1;
 unsigned char isLoadingAddressArray = 0;
 unsigned char isLoadingCmdArray = 0;
-unsigned char messageReady = 0;
 unsigned char arraySizeCounter = 0;
 
 // Loading arrays
@@ -59,9 +58,6 @@ void readDataBit() {
 		
 	// We check to see if we need to switch to address array
 	checkArrayStatus();
-	
-	// We check to see if a message is ready. And if its for this unit. If so, we run the command
-	checkSendMessage();	
 }
 
 void checkArrayStatus() {
@@ -86,7 +82,7 @@ void checkArrayStatus() {
 		if (arraySizeCounter == sizeof(cmdbit)) {
 			isLoadingCmdArray = 0;
 			arraySizeCounter = 0;
-			messageReady = 1;
+			checkSendMessage();
 		}
 	}	
 }
@@ -107,15 +103,11 @@ void runCommand() {
 	}
 }
 
-void resetCheckValues() {
-	isLoadingStartArray = 1;
-	messageReady = 0;
-}
-
-void resetCommunicationArrays() {
+void resetListening() {
 	clearArray(startbit);
 	clearArray(addressbit);
 	clearArray(cmdbit);
+	isLoadingStartArray = 1;
 }
 
 char getListening() {
@@ -123,9 +115,8 @@ char getListening() {
 }
 
 void checkSendMessage() {
-	if ((messageReady == 1) && ((compareArray(addressbit, myAddressbit) == 1) || (compareArray(addressbit, publicAddressbit) == 1)))  {
+	if ((compareArray(addressbit, myAddressbit) == 1) || (compareArray(addressbit, publicAddressbit) == 1))
 		runCommand();
-		resetCommunicationArrays();
-		resetCheckValues();
-	}
+
+	resetListening();
 }

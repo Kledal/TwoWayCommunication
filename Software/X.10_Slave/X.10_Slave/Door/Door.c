@@ -66,12 +66,12 @@ unsigned char getStatus( void )
 
 ISR(INT2_vect)		//INT2 = PB2
 {
-	toggleDoor();
-	getStatus();
-	/* // Lasse og Lars kode
+// 	toggleDoor();
+// 	getStatus();
+	 // Lasse og Lars kode
 	if(status_ == 0)
 	{
 		PORTC = 0b11000000;		//simulates a person forcing the door open.
 	}
-	*/
+	
 }
