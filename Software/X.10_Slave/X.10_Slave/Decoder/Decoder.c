@@ -11,9 +11,9 @@ unsigned char isLoadingCmdArray = 0;
 unsigned char arraySizeCounter = 0;
 
 // Loading arrays
-unsigned char startbit[4] = "";
-unsigned char addressbit[8] = "";
-unsigned char cmdbit[4] = "";
+unsigned char startbit[4] = {0,0,0,0};
+unsigned char addressbit[8] = {0,0,0,0,0,0,0,0};
+unsigned char cmdbit[4] = {0,0,0,0};
 unsigned char startbits[4] = {1, 1, 1, 0};
 	
 // Command arrays
@@ -37,10 +37,11 @@ void readDataBit() {
 	char loadingBit = 0;
 	
 	// We wait 100*5 us for input on PINA1. If, at any point, we measure 5V, our loadingBit equals 1
-	for(i=0;i<100;i++) {
-		loadingBit |= PINA1;
-		_delay_us(5);
-	}
+// 	for(i=0;i<100;i++) {
+// 		loadingBit |= PINA1;
+// 		_delay_us(5);
+// 	}
+	loadingBit |= PINA1;
 	
 	if (isLoadingStartArray) {
 		loadShiftLeft(startbit, loadingBit);

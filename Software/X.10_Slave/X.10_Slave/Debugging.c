@@ -2,6 +2,7 @@
 #include <util/delay.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdlib.h>
 
 #include "Door/Door.h"
 #include "Encoder/Encoder.h"
@@ -18,10 +19,10 @@ void serialStatus();
 /*
 	Debugging strings 
 */
-char systemStatus[] = "--- System Status ---";
+char systemStatus[] = "\n\r--- System Status ---\n\r";
 char startArray[] = "Start array:";
-char adresseArray[] = "Adresse array:";
-char commandoArray[] = "Kommando array:";
+char adresseArray[] = "\n\rAdresse array:";
+char commandoArray[] = "\n\rKommando array:";
 
 /*
 	IO Mapping:
@@ -43,10 +44,15 @@ int main(void)
 	initDoor();
 	initInterrupts();
 	initTimer0();
+	InitUART(9600, 8, 1);
 	sei();
 	
 	DDRD = 0x00;
 	DDRA = 0x00;
+	
+	SendString(systemStatus);
+	
+	PORTC = 0b00000001;
 	
     while(1)
     {
@@ -78,40 +84,39 @@ void initInterrupts() {
  This method is for the zero cross detection.
 */
 ISR(INT1_vect) {
+	PORTC = 0b00000011;
 	if (getSendingStatus() == 1)
 		sendDataBit();
 		
 	if (getListening() == 1)
 		readDataBit();	
-	
+	PORTC = 0b00000111;
 	serialStatus();
 }
 
 void serialStatus() {
 	int i;
 	
+	PORTC = 0b00001111;
+	
 	SendString(systemStatus);
-	//Pseudo: Indsæt linjeskift
 	SendString(startArray);
-	for (i=0; i<= sizeof(startbit); i++) {
+	for (i=0; i< sizeof(startbit); i++) {
 		SendChar(' ');
-		SendChar(startbit[i]);
+		SendInteger(startbit[i]);
 		SendChar(',');
 	}
-	//Pseudo: Indsæt linjeskift
 	SendString(adresseArray);
-	for (i=0; i<= sizeof(addressbit); i++) {
+	for (i=0; i< sizeof(addressbit); i++) {
 		SendChar(' ');
-		SendChar(addressbit[i]);
+		SendInteger(addressbit[i]);
 		SendChar(',');
 	}
-	//Pseudo: Indsæt linjeskift
 	SendString(commandoArray);
-	for (i=0; i<= sizeof(cmdbit); i++) {
+	for (i=0; i< sizeof(cmdbit); i++) {
 		SendChar(' ');
-		SendChar(cmdbit[i]);
+		SendInteger(cmdbit[i]);
 		SendChar(',');
 	}	
-	//Pseudo: Indsæt linjeskift
 }
 

@@ -11,7 +11,7 @@ void loadShiftLeft(unsigned char *arrayRef, char data) {
 	int i;
 	for(i = 0; i<sizeof(arrayRef)-1; i++)
 		arrayRef[i] = arrayRef[i+1];
-
+	i = sizeof(arrayRef)-1;
 	arrayRef[i] = data;
 }
 
