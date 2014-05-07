@@ -19,10 +19,8 @@ char compareArray(unsigned char *arrayRef, unsigned char *arrayRef2, int size) {
 	int i;
 	for(i = 0; i<size; i++)
 	{
-		if (arrayRef[i] != arrayRef2[i]) {
-			SendString("Det er ikke lig hinanden");
-			return 0;
-		}			
+		if (arrayRef[i] != arrayRef2[i])
+			return 0;			
 	}
 	return 1;
 }

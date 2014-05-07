@@ -4,9 +4,10 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-unsigned char status_;
+int status_;
 
 void initDoor ( void );
-void changeStatus( unsigned char status );	//from slave to door
+void changeStatus( int status );	//from slave to door
 void toggleDoor( void );
-unsigned char getStatus( void );
+int getStatus( void );
+void setStatus( void );

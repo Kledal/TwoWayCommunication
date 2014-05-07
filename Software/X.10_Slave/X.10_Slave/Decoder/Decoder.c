@@ -18,7 +18,7 @@ unsigned char cmdbit[4] = {0,0,0,0};
 unsigned char startbits[4] = {1, 1, 1, 0};
 	
 // Command arrays
-unsigned char aabenArray[4] = {0, 1, 0, 1};
+unsigned char aabenArray[4] = {1, 1, 0, 0};
 unsigned char lukArray[4] = {0, 0, 1, 1};
 unsigned char statusArray[4] = {1, 1, 1, 1};
 
@@ -37,13 +37,15 @@ void readDataBit() {
 	int i;
 	int loadingBit = 0;
 	
+	_delay_us(200);
 	// We wait 100*5 us for input on PINA1. If, at any point, we measure 5V, our loadingBit equals 1
 // 	for(i=0;i<100;i++) {
-// 		loadingBit |= PINA1;
+// 		loadingBit |= (PINA & 0b00000001);
 // 		_delay_us(5);
 // 	}
 
-	loadingBit = (PINA & 0b00000001);	
+	loadingBit = (PINA & 0b00000001);
+	SendInteger(loadingBit);
 	
 	if (isLoadingStartArray) {
 		loadShiftLeft(startbit, loadingBit, 4);
@@ -68,7 +70,7 @@ void checkArrayStatus() {
 		if ((compareArray(startbit, startbits, 4)) == 1) {
 			isLoadingStartArray = 0;
 			isLoadingAddressArray = 1;
-			SendString("\n\rStartbit sekvens detecteret. Laeser adresse og kommando...\n\r");
+			//SendString("\n\rStartbit sekvens detecteret. Laeser adresse og kommando...\n\r");
 			return;
 		}	
 	}	
@@ -95,8 +97,10 @@ void runCommand() {
 	if (compareArray(cmdbit, aabenArray, 4))
 		changeStatus(1);
 		
-	if (compareArray(cmdbit, lukArray, 4))
+	if (compareArray(cmdbit, lukArray, 4)) {
+		SendString("\n\rJeg skal lukke doren nu...\n\r");
 		changeStatus(0);
+	}		
 
 	if (compareArray(cmdbit, statusArray, 4)) {
 		isListening = 0;
@@ -104,7 +108,7 @@ void runCommand() {
 			sendCommand(masterAddress, aabenStatus);
 		if (getStatus() == 0)
 			sendCommand(masterAddress, lukketStatus);
-		SendString("\n\rSender doer status til master...\n\r");
+		//SendString("\n\rSender doer status til master...\n\r");
 	}
 }
 
@@ -113,7 +117,7 @@ void resetListening() {
 	clearArray(addressbit, 8);
 	clearArray(cmdbit, 4);
 	isLoadingStartArray = 1;
-	SendString("\n\rLytter efter startbit sekvens...\n\r");
+	//SendString("\n\rLytter efter startbit sekvens...\n\r");
 }
 
 char getListening() {
@@ -122,10 +126,10 @@ char getListening() {
 
 void checkSendMessage() {
 	if ((compareArray(addressbit, myAddressbit, 8) == 1) || (compareArray(addressbit, publicAddressbit, 8) == 1)) {
-		SendString("\n\rKommandoen er til denne enhed\n\r");
+		//SendString("\n\rKommandoen er til denne enhed\n\r");
 		runCommand();
 	} else {
-		SendString("\n\rKommandoen er ikke til denne enhed\n\r");
+		//SendString("\n\rKommandoen er ikke til denne enhed\n\r");
 	}
 	resetListening();
 }

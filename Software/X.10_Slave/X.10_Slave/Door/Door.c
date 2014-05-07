@@ -5,7 +5,7 @@
 
 #include "../Door/Door.h"
 
-unsigned char status_= 0; //Status = 0: closed, status = 1: open
+int status_= 1; //Status_ = 0: closed, status_ = 1: open
 
 void initDoor ( void )
 {
@@ -13,8 +13,13 @@ void initDoor ( void )
 	PORTC = 0xFF;		//Turn off all LEDS
 }
 
-void changeStatus( unsigned char status )	//from slave to door
+void changeStatus( int status )	//from slave to door
 {
+// 	SendString("\n\rStatus variabel: ");
+// 	SendInteger(status);
+// 	SendString("\n\rStatus_ variabel: ");
+// 	SendInteger(status_);
+// 	SendString("\n\r");
 	if (status != status_)
 	{
 		toggleDoor();
@@ -37,7 +42,7 @@ void toggleDoor( void )
 			_delay_ms(375);
 		}
 		SendString("\n\rDoren er lukket\n\r");
-		getStatus();			//Changes status_ to the correct value
+		setStatus();			//Changes status_ to the correct value
 	}
 	else						//opening
 	{
@@ -51,28 +56,34 @@ void toggleDoor( void )
 			_delay_ms(375);
 		}
 		SendString("\n\rDoren er aaben\n\r");
-		getStatus();			//Changes status_ to the correct value
+		setStatus();			//Changes status_ to the correct value
 	}
 }
 
-unsigned char getStatus( void )
-{
-	if( PINC )
-		status_ = 1;
-	else
-		status_ = 0;
-		
+int getStatus( void )
+{			
 	return status_;
+}
+
+void setStatus( void )
+{
+		//SendString("\n\rStatus_ aendres...\n\r");
+		if( PINC ) {
+			//SendString("\n\rSaettes til 1\n\r");
+			status_ = 1;
+		}
+		else {
+			//SendString("\n\rSaettes til 0\n\r");
+			status_ = 0;
+		}
 }
 
 ISR(INT2_vect)		//INT2 = PB2
 {
-// 	toggleDoor();
-// 	getStatus();
-	 // Lasse og Lars kode
 	if(status_ == 0)
 	{
 		PORTC = 0b11000000;		//simulates a person forcing the door open.
+		setStatus();
 	}
 	
 }
