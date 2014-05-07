@@ -28,7 +28,7 @@ void toggleDoor( void )
 	
 	if (status_ == 1)		//closing
 	{
-		
+		SendString("\n\rDoren lukker...\n\r");
 		int i = 0;
 		for (i; i<8; i++)
 		{
@@ -36,11 +36,12 @@ void toggleDoor( void )
 			PORTC = PINC & mask;
 			_delay_ms(375);
 		}
-	
+		SendString("\n\rDoren er lukket\n\r");
 		getStatus();			//Changes status_ to the correct value
 	}
 	else						//opening
 	{
+		SendString("\n\rDoren aabner...\n\r");
 		_delay_ms(375);
 		int i = 0;
 		for (i; i<8; i++)
@@ -49,7 +50,7 @@ void toggleDoor( void )
 			PORTC = PINC | mask;
 			_delay_ms(375);
 		}
-		
+		SendString("\n\rDoren er aaben\n\r");
 		getStatus();			//Changes status_ to the correct value
 	}
 }

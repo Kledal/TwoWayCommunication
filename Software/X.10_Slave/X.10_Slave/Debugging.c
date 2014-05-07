@@ -51,8 +51,7 @@ int main(void)
 	DDRA = 0x00;
 	
 	SendString(systemStatus);
-	
-	PORTC = 0b00000001;
+	SendString("\n\rLytter efter startbit sekvens...\n\r");
 	
     while(1)
     {
@@ -84,20 +83,17 @@ void initInterrupts() {
  This method is for the zero cross detection.
 */
 ISR(INT1_vect) {
-	PORTC = 0b00000011;
 	if (getSendingStatus() == 1)
 		sendDataBit();
 		
 	if (getListening() == 1)
 		readDataBit();	
-	PORTC = 0b00000111;
+
 	serialStatus();
 }
 
 void serialStatus() {
 	int i;
-	
-	PORTC = 0b00001111;
 	
 	SendString(systemStatus);
 	SendString(startArray);

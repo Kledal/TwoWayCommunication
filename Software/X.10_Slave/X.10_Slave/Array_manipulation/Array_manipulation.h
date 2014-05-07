@@ -9,8 +9,8 @@
 #ifndef INCFILE1_H_
 #define INCFILE1_H_
 
-void clearArray(unsigned char *);
-void loadShiftLeft(unsigned char *, char );
-char compareArray(unsigned char *, unsigned char *);
+void clearArray(unsigned char *, int);
+void loadShiftLeft(unsigned char *, int , int);
+char compareArray(unsigned char *, unsigned char *, int);
 
 #endif /* INCFILE1_H_ */
