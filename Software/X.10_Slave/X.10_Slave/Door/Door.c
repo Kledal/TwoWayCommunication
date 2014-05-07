@@ -3,22 +3,23 @@
  * Version 0.1
  */
 
-#include "Door.h"
+#include "../Door/Door.h"
 
-unsigned char status_=0; //Status = 0: closed, status = 1: open
+int status_= 1; //Status_ = 0: closed, status_ = 1: open
 
 void initDoor ( void )
 {
 	DDRC = 0xFF;		//PORTC set as output
-	PORTC = 0x00;		//Turn off all LEDS
-	
-	GICR |= (1<<INT2); 	// this enables interrupt 2, INT2 = PB2
-	MCUCSR = (0<<ISC2); // Interrupt on falling edge
-	sei();
+	PORTC = 0xFF;		//Turn off all LEDS
 }
 
-void changeStatus( unsigned char status )	//from slave to door
+void changeStatus( int status )	//from slave to door
 {
+// 	SendString("\n\rStatus variabel: ");
+// 	SendInteger(status);
+// 	SendString("\n\rStatus_ variabel: ");
+// 	SendInteger(status_);
+// 	SendString("\n\r");
 	if (status != status_)
 	{
 		toggleDoor();
@@ -32,7 +33,7 @@ void toggleDoor( void )
 	
 	if (status_ == 1)		//closing
 	{
-		
+		SendString("\n\rDoren lukker...\n\r");
 		int i = 0;
 		for (i; i<8; i++)
 		{
@@ -40,11 +41,12 @@ void toggleDoor( void )
 			PORTC = PINC & mask;
 			_delay_ms(375);
 		}
-	
-		getStatus();			//Changes status_ to the correct value
+		SendString("\n\rDoren er lukket\n\r");
+		setStatus();			//Changes status_ to the correct value
 	}
-	else					//opening
+	else						//opening
 	{
+		SendString("\n\rDoren aabner...\n\r");
 		_delay_ms(375);
 		int i = 0;
 		for (i; i<8; i++)
@@ -53,19 +55,27 @@ void toggleDoor( void )
 			PORTC = PINC | mask;
 			_delay_ms(375);
 		}
-		
-		getStatus();			//Changes status_ to the correct value
+		SendString("\n\rDoren er aaben\n\r");
+		setStatus();			//Changes status_ to the correct value
 	}
 }
 
-unsigned char getStatus( void )
-{
-	if( PINC )
-		status_ = 1;
-	else
-		status_ = 0;
-		
+int getStatus( void )
+{			
 	return status_;
+}
+
+void setStatus( void )
+{
+		//SendString("\n\rStatus_ aendres...\n\r");
+		if( PINC ) {
+			//SendString("\n\rSaettes til 1\n\r");
+			status_ = 1;
+		}
+		else {
+			//SendString("\n\rSaettes til 0\n\r");
+			status_ = 0;
+		}
 }
 
 ISR(INT2_vect)		//INT2 = PB2
@@ -73,5 +83,7 @@ ISR(INT2_vect)		//INT2 = PB2
 	if(status_ == 0)
 	{
 		PORTC = 0b11000000;		//simulates a person forcing the door open.
+		setStatus();
 	}
+	
 }
