@@ -153,7 +153,7 @@ ISR(USART_RXC_vect)
 		uart_data[uart_count] = modtaget_tegn;
 		uart_count++;
 	}else{
-		clearArray(sendInfo, 16);
+		clearArray(sendInfo, 17);
 		// Load uart data into sendinfo array.
 		int i;
   		for(i = 0;i<sizeof(sendInfo);i++) {
@@ -162,7 +162,7 @@ ISR(USART_RXC_vect)
 		// Output sendinfo to serial.
 		SendString(sendInfo);
 		// Clear uart_data.
-		clearArray(uart_data, 16);
+		clearArray(uart_data, 17);
 	
 		uart_count = 0;
 		sendCount = 0;

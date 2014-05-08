@@ -13,12 +13,6 @@
 */
 void initInterrupts();
 
-/*
- Properties for this unit
-*/
-unsigned char myAddressbit[8] = {0, 0, 1, 1, 1, 1, 0, 0};
-unsigned char publicAddressbit[8] = {1, 0, 1, 0, 1, 0, 1, 0};
-
 int main(void)
 {
 	InitUART(9600, 8, 1);
@@ -42,20 +36,6 @@ int main(void)
     }
 }
 
-void listening()
-{
-	isListening = 1;
-
-	while(isListening == 1) {
-		// If the address matches the address of this unit, or the public address.
-		if ((messageReady == 1) && ((compareArray(addressbit, myAddressbit) == 1) || (compareArray(addressbit, publicAddressbit) == 1)))  {
-			runCommand();
-			resetCommunicationArrays();
-			resetCheckValues();
-		}
-	}
-}
-
 void initInterrupts() {
 	// this enables interrupt 2. Which triggers on rising & falling.
 	// Enables interrupt 0 for the encoder
@@ -67,17 +47,12 @@ void initInterrupts() {
  This method is for the zero cross detection.
 */
 ISR(INT1_vect) {
+	cli();
 	sendData();
-	if (isSending) {
-		unsigned char bit = sendInfo[sendCount];
-		//we need to check against string, because that is what we are receiving over
-		if (bit == '1')
-			sendData();
-
-		sendCount++;
-		if (sendCount > sizeof(sendInfo))
-			isSending = 0;
-	}
-	if (isListening)
+	
+	if (getSendingStatus() == 1)
+		sendDataBit();
+		
+	if (getListening() == 1)
 		readDataBit();
 }

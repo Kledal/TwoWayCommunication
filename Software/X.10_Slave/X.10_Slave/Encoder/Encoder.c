@@ -29,16 +29,20 @@ void initTimer0 (void)
 */
 void sendCommand(char address[8], char cmd[4])
 {
-	for (int i=0;i<sizeof(startSequence);i++) {
-		sendInfo[i] = startSequence[i];
+	int i;
+	
+	sendInfo[0] = 0;
+	
+	for (i=0;i<sizeof(startSequence);i++) {
+		sendInfo[i + 1] = startSequence[i];
 	}
-	for (int i=0;i<sizeof(address);i++)
+	for (i=0;i<sizeof(address);i++)
 	{
-		sendInfo[i + sizeof(startSequence)] = address[i];
+		sendInfo[i + 5] = address[i];
 	}
-	for (int i=0;i<sizeof(cmd);i++)
+	for (i=0;i<sizeof(cmd);i++)
 	{
-		sendInfo[i + sizeof(address)] = cmd[i];
+		sendInfo[i + 13] = cmd[i];
 	}
 	sendCount = 0;
 	isSending = 1;
@@ -57,6 +61,4 @@ void sendDataBit() {
 	sendCount++;
 	if (sendCount > sizeof(sendInfo))
 		isSending = 0;
-	
-	
 }

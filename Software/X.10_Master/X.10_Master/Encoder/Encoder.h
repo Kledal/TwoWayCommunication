@@ -13,8 +13,14 @@ void sendCommand();
 /*
  Send variables
 */
-extern unsigned char sendInfo[17];
-extern unsigned char sendCount;
-extern unsigned char isSending;
+void sendData();
+void initTimer0();
+void sendCommand();
+char getSendingStatus();
+void sendDataBit();
+
+unsigned char sendInfo[17];
+unsigned char sendCount;
+unsigned char isSending;
 
 #endif /* ENCODER_H_ */

@@ -23,7 +23,6 @@ void initTimer0 (void)
  	DDRB |= (1<<PB3);		// Set Port B3 as output
 }
 
-
 /*
  This command builds the senddata array and resets the pointer.
 */
@@ -42,4 +41,21 @@ void sendCommand(char address[8], char cmd[4])
 	}
 	sendCount = 0;
 	isSending = 1;
+}
+
+void sendDataBit() {
+	unsigned char bit = sendInfo[sendCount];
+	//we need to check against string, because that is what we are receiving over
+	if (bit == '1')
+	sendData();
+
+	sendCount++;
+	if (sendCount > sizeof(sendInfo))
+	isSending = 0;
+	
+	
+}
+
+char getSendingStatus() {
+	return isSending;
 }

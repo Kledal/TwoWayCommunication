@@ -17,17 +17,9 @@ void initInterrupts();
 void serialStatus();
 
 /*
-	Debugging strings 
-*/
-char systemStatus[] = "\n\r--- System Status ---\n\r";
-char startArray[] = "Start array: ";
-char adresseArray[] = "\n\rAdresse array: ";
-char commandoArray[] = "\n\rKommando array: ";
-
-/*
 	IO Mapping:
 		- PORT A - Input
-			- PA1 - Data input
+			- PA0 - Data input
 				-SW1 i debugging mode
 		- PORT B - Input
 			- PB2 - INT2 (Dør interrupt)
@@ -50,7 +42,7 @@ int main(void)
 	DDRD = 0x00;
 	DDRA = 0x00;
 	
-	SendString(systemStatus);
+	SendString("\n\r--- System Status ---\n\r");
 	SendString("\n\rLytter efter startbit sekvens...\n\r");
 	
     while(1)
@@ -69,9 +61,7 @@ void initInterrupts() {
 	// For debugging: (Interrupt on falling edge)
 	/*MCUCR = 0b00001000;*/
 	
-	
 	MCUCSR = (0<<ISC2); // Interrupt INT 2 on falling edge
-	
 }
 
 /*
@@ -85,23 +75,22 @@ ISR(INT1_vect) {
 	if (getListening() == 1)
 		readDataBit();	
 
-	//serialStatus();
 	sei();
 }
 
 void serialStatus() {
 	int i;
 	
-	SendString(systemStatus);
-	SendString(startArray);
+	SendString("\n\r--- System Status ---\n\r");
+	SendString("Start array: ");
 	for (i=0; i< sizeof(startbit); i++)
 		SendInteger(startbit[i]);
 
-	SendString(adresseArray);
+	SendString("\n\rAdresse array: ");
 	for (i=0; i< sizeof(addressbit); i++)
 		SendInteger(addressbit[i]);
 
-	SendString(commandoArray);
+	SendString("\n\rKommando array: ");
 	for (i=0; i< sizeof(cmdbit); i++) 
 		SendInteger(cmdbit[i]);
 }
