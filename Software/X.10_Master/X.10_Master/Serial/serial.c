@@ -1,7 +1,7 @@
 /****************************************************
 * "uart_int.c":                                     *
 * Implementation file for the Meaga32 UART driver.  *
-* RX interrupt can be enabled during initialization.* 
+* RX interrupt can be enabled during initialization.*
 * The driver does not handle the RX interrupts.     *
 *                                                   *
 *  STK500 setup:                                    *
@@ -24,7 +24,7 @@ unsigned char uart_data[17] = "";
 int uart_count = 0;
 
 // Constants
-#define XTAL 3686400  
+#define XTAL 3686400
 
 /*************************************************************************
 USART initilization.
@@ -44,7 +44,7 @@ void InitUART(unsigned long BaudRate, unsigned char DataBit, unsigned char RX_in
 unsigned int TempUBRR;
 
   if ((BaudRate >= 110) && (BaudRate <= 115200) && (DataBit >=5) && (DataBit <= 8))
-  { 
+  {
     // "Normal" clock, no multiprocesser mode (= default)
     UCSRA = 0b00100000;
     // No interrupts enabled
@@ -67,7 +67,7 @@ unsigned int TempUBRR;
     UBRRH = TempUBRR >> 8;
     // Write lower part of UBRR
     UBRRL = TempUBRR;
-  }  
+  }
 }
 
 
@@ -88,7 +88,7 @@ char ReadChar()
 {
   // Wait for new character received
   while ( (UCSRA & (1<<7)) == 0 )
-  {}                        
+  {}
   // Then return it
   return UDR;
 }
@@ -97,7 +97,7 @@ char ReadChar()
 Awaits transmitter-register ready.
 Then it send the character.
 Parameter :
-	Tegn : Character for sending. 
+	Tegn : Character for sending.
 *************************************************************************/
 void SendChar(char Tegn)
 {
@@ -111,7 +111,7 @@ void SendChar(char Tegn)
 /*************************************************************************
 Sends 0-terminated string.
 Parameter:
-   Streng: Pointer to the string. 
+   Streng: Pointer to the string.
 *************************************************************************/
 void SendString(char* Streng)
 {
@@ -130,12 +130,12 @@ Converts the integer "Tal" to an ASCII string - and then sends this string
 using the USART.
 Makes use of the C standard library <stdlib.h>.
 Parameter:
-      Tal: The integer to be converted and send. 
+      Tal: The integer to be converted and send.
 *************************************************************************/
 void SendInteger(int Tal)
 {
   char array[7];
-  // Convert the integer til an ASCII string (array), radix = 10 
+  // Convert the integer til an ASCII string (array), radix = 10
   itoa(Tal, array, 10);
   // - then send the string
   SendString(array);
@@ -146,28 +146,50 @@ void SendInteger(int Tal)
 */
 ISR(USART_RXC_vect)
 {
-	char modtaget_tegn;
-	modtaget_tegn = UDR;
+  char modtaget_tegn;
+  modtaget_tegn = UDR;
 
-	if (modtaget_tegn != 13) {
-		uart_data[uart_count] = modtaget_tegn;
-		uart_count++;
-	}else{
-		clearArray(sendInfo, 17);
-		// Load uart data into sendinfo array.
-		int i;
-  		for(i = 0;i<sizeof(sendInfo);i++) {
- 			sendInfo[i] = uart_data[i];
-  		}
-		// Output sendinfo to serial.
-		SendString(sendInfo);
-		// Clear uart_data.
-		clearArray(uart_data, 17);
-	
-		uart_count = 0;
-		sendCount = 0;
-		isSending = 1;
-	}
+  if (modtaget_tegn != 13) {
+    uart_data[uart_count] = modtaget_tegn;
+    uart_count++;
+  }else{
+
+    int isHandled = 1;
+
+    switch (uart_data[0])
+    {
+      case 'O':
+        SendString("O");
+        isHandled = 0;
+      break;
+      case 'S':
+        if (!getLoginStatus()){
+          SendString("I");
+        }else{
+          SendString("L");
+        }
+        isHandled = 0;
+      break;
+    }
+
+
+    if (isHandled) {
+      clearArray(sendInfo);
+      // Load uart data into sendinfo array.
+      int i;
+        for(i = 0;i<sizeof(sendInfo);i++) {
+        sendInfo[i] = uart_data[i];
+        }
+      // Output sendinfo to serial.
+      SendString(sendInfo);
+
+      uart_count = 0;
+      sendCount = 0;
+      isSending = 1;
+    }
+    // Clear uart_data.
+    clearArray(uart_data);
+  }
 
 }
 
