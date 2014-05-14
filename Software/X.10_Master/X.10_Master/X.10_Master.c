@@ -55,4 +55,6 @@ ISR(INT1_vect) {
 		
 	if (getListening() == 1)
 		readDataBit();
+		
+	sei();
 }

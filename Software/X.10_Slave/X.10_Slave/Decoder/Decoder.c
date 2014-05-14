@@ -23,8 +23,8 @@ unsigned char lukArray[4] = {0, 0, 1, 1};
 unsigned char statusArray[4] = {1, 1, 1, 1};
 
 // Sequence arrays for sending status to master
-unsigned char aabenStatus[4] = {1, 0, 1, 0};
-unsigned char lukketStatus[4] = {0, 1, 0, 1};
+unsigned char aabenStatus[4] = {1, 1, 0, 0};
+unsigned char lukketStatus[4] = {0, 0, 1, 1};
 
 // Address for master unit
 unsigned char masterAddress[8] = {0, 0, 1, 1, 1, 1, 0, 0};
