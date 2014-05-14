@@ -29,7 +29,7 @@ unsigned char lukketStatus[4] = {0, 0, 1, 1};
 // Address for master unit
 unsigned char masterAddress[8] = {0, 0, 1, 1, 1, 1, 0, 0};
 
-// Properties for this unit
+// Properties for this unit (Slave 1)
 unsigned char myAddressbit[8] = {1, 1, 0, 0, 1, 1, 0, 0};
 unsigned char publicAddressbit[8] = {1, 0, 1, 0, 1, 0, 1, 0};
 
@@ -40,6 +40,7 @@ void readDataBit() {
 	_delay_us(200);
 
 	loadingBit = (PINA & 0b00000001);
+
 	SendInteger(loadingBit);
 	
 	if (isLoadingStartArray) {

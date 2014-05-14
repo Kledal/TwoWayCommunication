@@ -21,9 +21,9 @@ void serialStatus();
 		- PORT A - Input
 			- PA0 - Data input
 				-SW1 i debugging mode
-		- PORT B - Input
+		- PORT B - Input/Output
 			- PB2 - INT2 (Dør interrupt)
-				- SW7
+			- PB3 - Data output
 		- PORT C - LED Output
 		- PORT D - Input
 			- PD3 - INT1 (Zero interrupt)

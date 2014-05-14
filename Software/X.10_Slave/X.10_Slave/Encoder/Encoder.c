@@ -46,6 +46,12 @@ void sendCommand(char address[8], char cmd[4])
 	}
 	sendCount = 0;
 	isSending = 1;
+	
+	SendString("\n\rDatapakken, sendInfo, indeholder:");
+	for (i=0; i< sizeof(startbit); i++)
+ 		SendInteger(sendInfo[i]);
+		 
+	SendString("\n\r");
 }
 
 char getSendingStatus() {

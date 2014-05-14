@@ -13,6 +13,22 @@
 */
 void initInterrupts();
 
+/*
+	IO Mapping (STK-500):
+		- PORT A - Input
+			- PA0 - Data input
+			- PA1 - okPw
+			- PA2 - okLogin
+		- PORT B - Output
+			- PB3 - Data output
+		- PORT D - Input
+			- PD3 - INT1 (Zero interrupt)
+	IO Mapping (DE2):
+		- GPIO_1[0] - okLogin
+		- GPIO_1[1] - okPw
+		- GPIO_1[12] - Ground
+*/
+
 int main(void)
 {
 	InitUART(9600, 8, 1);

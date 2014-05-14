@@ -10,20 +10,16 @@ unsigned char isLoadingAddressArray = 0;
 unsigned char isLoadingCmdArray = 0;
 unsigned char arraySizeCounter = 0;
 
+// Serial Master-to-PC variable
+char endByte = 13;
+
 // Loading arrays
 unsigned char startbit[4] = {0,0,0,0};
 unsigned char addressbit[8] = {0,0,0,0,0,0,0,0};
 unsigned char cmdbit[4] = {0,0,0,0};
 unsigned char startbits[4] = {1, 1, 1, 0};
-	
-// Command arrays
 
-
-// Sequence arrays for sending status to master
-unsigned char aabenStatus[4] = {1, 0, 1, 0};
-unsigned char lukketStatus[4] = {0, 1, 0, 1};
-
-// Properties for this unit
+// Properties for this unit (Master)
 unsigned char myAddressbit[8] = {0, 0, 1, 1, 1, 1, 0, 0};
 unsigned char publicAddressbit[8] = {1, 0, 1, 0, 1, 0, 1, 0};
 
@@ -34,6 +30,7 @@ void readDataBit() {
 	_delay_us(200);
 
 	loadingBit = (PINA & 0b00000001);
+
 	/*SendInteger(loadingBit);*/
 	
 	if (isLoadingStartArray) {
@@ -82,7 +79,13 @@ void checkArrayStatus() {
 }
 
 void runCommand() {
+	int i;
 	
+	SendString("S:");
+	for (i=0; i< sizeof(cmdbit); i++)
+		SendInteger(cmdbit[i]);
+	
+	SendChar(endByte);
 }
 
 void resetListening() {

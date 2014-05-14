@@ -8,19 +8,21 @@
 /*
  Listening variables
 */
-extern unsigned char isListening;
-extern unsigned char isLoadingStartArray;
-extern unsigned char isLoadingAddressArray;
-extern unsigned char isLoadingCmdArray;
-extern unsigned char messageReady;
-extern unsigned char arraySizeCounter;
+unsigned char isListening;
+unsigned char isLoadingStartArray;
+unsigned char isLoadingAddressArray;
+unsigned char isLoadingCmdArray;
+unsigned char messageReady;
+unsigned char arraySizeCounter;
 
-extern unsigned char startbit[4];
-extern unsigned char addressbit[8];
-extern unsigned char cmdbit[4];
+unsigned char startbit[4];
+unsigned char addressbit[8];
+unsigned char cmdbit[4];
 
-extern unsigned char startbits[4];
+unsigned char startbits[4];
 
+// Serial Master-to-PC variable
+char endByte;
 
 void readDataBit();
 void runCommand();
