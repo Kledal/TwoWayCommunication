@@ -163,10 +163,15 @@ ISR(USART_RXC_vect)
         isHandled = 0;
       break;
       case 'S':
-        if (!getLoginStatus()){
+         if (getPwStatus()) {
+           SendString("K");
+           SendChar(endbyte);
+         }else if (!getLoginStatus()){
           SendString("I");
-        }else{
+          SendChar(endbyte);
+        }else if(getLoginStatus()){
           SendString("L");
+          SendChar(endbyte);
         }
         isHandled = 0;
       break;
@@ -180,8 +185,8 @@ ISR(USART_RXC_vect)
         for(i = 0;i<sizeof(sendInfo);i++) {
         sendInfo[i] = uart_data[i];
         }
-      // Output sendinfo to serial.
-      SendString(sendInfo);
+        if (sendInfo[14] == '1' && sendInfo[17] == '1')
+          changeStatus = 1;
 
       uart_count = 0;
       sendCount = 0;

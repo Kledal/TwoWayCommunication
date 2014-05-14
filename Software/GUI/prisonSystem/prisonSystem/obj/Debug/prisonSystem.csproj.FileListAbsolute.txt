@@ -14,3 +14,14 @@ C:\Users\Bruger\Documents\GitHub\gruppe2\Software\GUI\prisonSystem\prisonSystem\
 T:\github\gruppe2\Software\GUI\prisonSystem\prisonSystem\bin\Debug\prisonSystem.exe.config
 T:\github\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.exe
 T:\github\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.pdb
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\bin\Debug\prisonSystem.exe.config
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.exe
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.pdb
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\bin\Debug\prisonSystem.exe
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\bin\Debug\prisonSystem.pdb
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.Form1.resources
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.loginForm.resources
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.Properties.Resources.resources
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.csproj.GenerateResource.Cache
+\\psf\Home\Desktop\gruppe2\Software\GUI\prisonSystem\prisonSystem\obj\Debug\prisonSystem.LogForm.resources

@@ -11,18 +11,11 @@ using System.Windows.Forms;
 namespace prisonSystem
 {
     public partial class loginForm : Form
-    {
-        int mode = 0;
-         
+    {        
 
         public loginForm()
         {
             InitializeComponent();
-        }
-
-        private void loginForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         public void changeStatusMessage(string message, Color color)
@@ -34,34 +27,39 @@ namespace prisonSystem
 
         private void testBtn_Click(object sender, EventArgs e)
         {
-            //openMainWindow();
-            
-            timer1.Interval = 1000;
-            timer1.Enabled = true;
-            timer1.Start();
+            openMainWindow();
              
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            switch (mode)
+            updateStatusTxt();
+        }
+
+        public void updateStatusTxt()
+        {
+            switch (Program.mode)
             {
                 case 0:
-                    changeStatusMessage("Forbundet til STK500..", Color.Blue);
+                    changeStatusMessage("Kontroller forbindelse..", Color.Blue);
+                    Program.GetSerial().SendData("O");
+                    break;
+                case 1:
+                    changeStatusMessage("Forbundet til STK500..", Color.Green);
+                    Program.mode = 3;
                     break;
                 case 3:
                     changeStatusMessage("Afventer kodeindtast fra DE2 board..", Color.Blue);
-                    timer1.Stop();
+                    Program.GetSerial().SendData("S");
                     break;
                 case 5:
                     changeStatusMessage("Koden er blevet godkendt, nulstil alle pins på DE2 boardet..", Color.Green);
+                    Program.GetSerial().SendData("S");
                     break;
                 case 7:
                     openMainWindow();
-
                     break;
             }
-            mode++;
         }
 
         private void openMainWindow()
@@ -71,6 +69,15 @@ namespace prisonSystem
             form.Show();
 
             this.Close();
+        }
+
+        private void loginForm_Load(object sender, EventArgs e)
+        {
+            timer1.Interval = 1000;
+            timer1.Enabled = true;
+            timer1.Start();
+
+            Program.GetSerial().SendData("O");
         }
 
     }

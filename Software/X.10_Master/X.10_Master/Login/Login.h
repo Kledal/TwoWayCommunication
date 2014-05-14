@@ -11,8 +11,9 @@
 #include <avr/io.h>
 
 unsigned char okPw( void );
-void okLogin( void );
+unsigned char okLogin( void );
 unsigned char getLoginStatus( void );
+int getPwStatus( void );
 
 
 #endif /* LOGIN_H_ */
