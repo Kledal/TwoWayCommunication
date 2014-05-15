@@ -15,6 +15,8 @@ namespace prisonSystem
         public bool shouldHide = true;
         private string _port = "COM3";
 
+        private Slave _lastSlave = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -45,6 +47,14 @@ namespace prisonSystem
         {
             Setup();
             Program.GetSerial().DataReceived += Form1_DataReceived;
+            RedrawSlaves();
+
+            showLoginForm();
+        }
+
+        private void RedrawSlaves()
+        {
+            unitList.Items.Clear();
             foreach (Slave slave in Program.GetSlaves())
             {
                 ListViewItem item = new ListViewItem();
@@ -56,10 +66,8 @@ namespace prisonSystem
                 item.UseItemStyleForSubItems = false;
                 item.SubItems[2].ForeColor = Color.Red;
 
-                unitList.Items.Add(item); 
+                unitList.Items.Add(item);
             }
-
-            showLoginForm();
         }
 
         void Form1_DataReceived(object source, string data)
@@ -75,7 +83,9 @@ namespace prisonSystem
                         Program.WriteLog("Got online status from STK500.");
                         break;
                     case "S":
-
+                        int pos = Array.IndexOf(Program._commands, args[1]);
+                        Program.GetSlaveByAddr(_lastSlave.Address).SetState(Program._humancmds[pos]);
+                        Program.updateSlaves = true;
                         break;
                     case "K":
                         Program.mode = 5;
@@ -85,7 +95,7 @@ namespace prisonSystem
                             Program.mode = 7;
                         break;
                     default:
-                        Program.WriteLog("Didnt recognize data: " + data);
+                        //Program.WriteLog("Didnt recognize data: " + data);
                         break;
                 }
             }
@@ -142,6 +152,16 @@ namespace prisonSystem
             Slave s = Program.GetSlaveByAddr(getSelectedAddr());
             Program.WriteLog("Status cmd called on slave: " + s.Address + ".");
             s.SendMessage(CMD.Status);
+            _lastSlave = s;
+        }
+
+        private void slaveUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            if (Program.updateSlaves)
+            {
+                RedrawSlaves();
+                Program.updateSlaves = false;
+            }
         }
     }
 }

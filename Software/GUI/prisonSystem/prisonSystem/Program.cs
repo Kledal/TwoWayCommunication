@@ -7,6 +7,7 @@ using System.Windows.Forms;
 namespace prisonSystem
 {
     enum CMD : int { Open, Close, Status, StartBit }
+
     static class Program
     {
         static Serial _serial;
@@ -15,10 +16,12 @@ namespace prisonSystem
         static List<Slave> _slaves;
 
         static public string[] _commands = { "1100", "0011", "1111", "01110" };
+        static public string[] _humancmds = { "Åben", "Lukket", "Ikke tilgængelig" };
 
         static public string publicAddress = "10101010";
 
         static public int mode = 0;
+        static public bool updateSlaves = false;
 
         /// <summary>
         /// The main entry point for the application.

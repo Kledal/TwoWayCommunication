@@ -186,7 +186,7 @@ ISR(USART_RXC_vect)
         sendInfo[i] = uart_data[i];
         }
         if (sendInfo[14] == '1' && sendInfo[17] == '1')
-          changeStatus = 1;
+            changeStatus = 1;
 
       uart_count = 0;
       sendCount = 0;

@@ -39,10 +39,11 @@
             this.slaveMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.åbenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lukDørToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.opdaterStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAllBtn = new System.Windows.Forms.Button();
             this.closeAllBtn = new System.Windows.Forms.Button();
             this.openLogBtn = new System.Windows.Forms.Button();
-            this.opdaterStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.slaveUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.slaveMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,21 +111,28 @@
             this.lukDørToolStripMenuItem,
             this.opdaterStatusToolStripMenuItem});
             this.slaveMenu.Name = "slaveMenu";
-            this.slaveMenu.Size = new System.Drawing.Size(153, 92);
+            this.slaveMenu.Size = new System.Drawing.Size(152, 70);
             // 
             // åbenToolStripMenuItem
             // 
             this.åbenToolStripMenuItem.Name = "åbenToolStripMenuItem";
-            this.åbenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.åbenToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.åbenToolStripMenuItem.Text = "Åben dør";
             this.åbenToolStripMenuItem.Click += new System.EventHandler(this.åbenToolStripMenuItem_Click);
             // 
             // lukDørToolStripMenuItem
             // 
             this.lukDørToolStripMenuItem.Name = "lukDørToolStripMenuItem";
-            this.lukDørToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lukDørToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.lukDørToolStripMenuItem.Text = "Luk dør";
             this.lukDørToolStripMenuItem.Click += new System.EventHandler(this.lukDørToolStripMenuItem_Click);
+            // 
+            // opdaterStatusToolStripMenuItem
+            // 
+            this.opdaterStatusToolStripMenuItem.Name = "opdaterStatusToolStripMenuItem";
+            this.opdaterStatusToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.opdaterStatusToolStripMenuItem.Text = "Opdater status";
+            this.opdaterStatusToolStripMenuItem.Click += new System.EventHandler(this.opdaterStatusToolStripMenuItem_Click);
             // 
             // openAllBtn
             // 
@@ -166,12 +174,11 @@
             this.openLogBtn.UseVisualStyleBackColor = true;
             this.openLogBtn.Click += new System.EventHandler(this.openLogBtn_Click);
             // 
-            // opdaterStatusToolStripMenuItem
+            // slaveUpdateTimer
             // 
-            this.opdaterStatusToolStripMenuItem.Name = "opdaterStatusToolStripMenuItem";
-            this.opdaterStatusToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.opdaterStatusToolStripMenuItem.Text = "Opdater status";
-            this.opdaterStatusToolStripMenuItem.Click += new System.EventHandler(this.opdaterStatusToolStripMenuItem_Click);
+            this.slaveUpdateTimer.Enabled = true;
+            this.slaveUpdateTimer.Interval = 200;
+            this.slaveUpdateTimer.Tick += new System.EventHandler(this.slaveUpdateTimer_Tick);
             // 
             // Form1
             // 
@@ -209,6 +216,7 @@
         private System.Windows.Forms.ToolStripMenuItem åbenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lukDørToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opdaterStatusToolStripMenuItem;
+        private System.Windows.Forms.Timer slaveUpdateTimer;
 
     }
 }
