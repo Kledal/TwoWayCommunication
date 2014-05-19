@@ -48,7 +48,6 @@ namespace prisonSystem
             Setup();
             Program.GetSerial().DataReceived += Form1_DataReceived;
             RedrawSlaves();
-
             showLoginForm();
         }
 
@@ -64,7 +63,9 @@ namespace prisonSystem
                 item.SubItems.Add(slave.State);
 
                 item.UseItemStyleForSubItems = false;
-                item.SubItems[2].ForeColor = Color.Red;
+
+                if (slave.State == "Ikke tilgængelig")
+                    item.SubItems[2].ForeColor = Color.Red;
 
                 unitList.Items.Add(item);
             }
@@ -124,12 +125,12 @@ namespace prisonSystem
 
         private void openAllBtn_Click(object sender, EventArgs e)
         {
-            Program.GetSerial().SendData(Program._commands[(int)CMD.StartBit] + Program.publicAddress + Program._commands[(int)CMD.Open]);
+            Program.GetSerial().SendPublicData(CMD.Open);
         }
 
         private void closeAllBtn_Click(object sender, EventArgs e)
         {
-            Program.GetSerial().SendData(Program._commands[(int)CMD.StartBit] + Program.publicAddress + Program._commands[(int)CMD.Close]);
+            Program.GetSerial().SendPublicData(CMD.Close);
         }
 
         private string getSelectedAddr()

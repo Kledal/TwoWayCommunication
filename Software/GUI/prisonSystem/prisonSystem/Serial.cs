@@ -57,6 +57,11 @@ namespace prisonSystem
             Program.masterReady = false;
         }
 
+        public void SendPublicData(CMD command)
+        {
+            Program.commandqueue.Push(Program._commands[(int)CMD.StartBit] + Program.publicAddress + Program._commands[(int)command]);
+        }
+
         void _port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if (DataReceived != null)
