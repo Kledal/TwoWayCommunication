@@ -35,9 +35,12 @@ int main(void)
 	initInterrupts();
 	initTimer0();
 	sei();
-	
+
     while(1)
     {
+    	while(!okPw()) {}
+		while(!okLogin()) {}
+
 		// Not logged in, lets check -- *** needs to be a while loop in a while loop ***
 		// if the DE-2 is outputting
 		if (!getLoginStatus()) {
@@ -63,14 +66,25 @@ void initInterrupts() {
  This method is for the zero cross detection.
 */
 ISR(INT1_vect) {
-	cli();
-	sendData();
-	
-	if (getSendingStatus() == 1)
-		sendDataBit();
-		
-	if (getListening() == 1)
+
+	if (isSending) {
+		unsigned char bit = sendInfo[sendCount];
+		//we need to check against string, because that is what we are receiving over
+		if (bit == '1')
+			sendData();
+
+		sendCount++;
+		if (sendCount > sizeof(sendInfo))
+		{
+			isSending = 0;
+			if (changeStatus) {
+				isListening = 1;
+				changeStatus = 0;
+			}
+		}
+	}
+	if (isListening)
 		readDataBit();
-		
+
 	sei();
 }

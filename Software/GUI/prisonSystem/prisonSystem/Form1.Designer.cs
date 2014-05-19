@@ -34,12 +34,17 @@
             this.icons = new System.Windows.Forms.ImageList(this.components);
             this.unitList = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.slaveMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.åbenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lukDørToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.opdaterStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAllBtn = new System.Windows.Forms.Button();
             this.closeAllBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.openLogBtn = new System.Windows.Forms.Button();
+            this.slaveUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.slaveMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // logoffBtn
@@ -53,6 +58,7 @@
             this.logoffBtn.Text = "Log af";
             this.logoffBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.logoffBtn.UseVisualStyleBackColor = true;
+            this.logoffBtn.Click += new System.EventHandler(this.logoffBtn_Click);
             // 
             // icons
             // 
@@ -71,8 +77,8 @@
             this.unitList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader4,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader2});
+            this.unitList.ContextMenuStrip = this.slaveMenu;
             this.unitList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitList.FullRowSelect = true;
             this.unitList.GridLines = true;
@@ -85,18 +91,48 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Dør";
+            this.columnHeader1.Text = "Adresse";
             this.columnHeader1.Width = 130;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Alias";
+            this.columnHeader4.Width = 180;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Status";
-            this.columnHeader2.Width = 145;
+            this.columnHeader2.Width = 200;
             // 
-            // columnHeader3
+            // slaveMenu
             // 
-            this.columnHeader3.Text = "Toggle";
-            this.columnHeader3.Width = 160;
+            this.slaveMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.åbenToolStripMenuItem,
+            this.lukDørToolStripMenuItem,
+            this.opdaterStatusToolStripMenuItem});
+            this.slaveMenu.Name = "slaveMenu";
+            this.slaveMenu.Size = new System.Drawing.Size(152, 70);
+            // 
+            // åbenToolStripMenuItem
+            // 
+            this.åbenToolStripMenuItem.Name = "åbenToolStripMenuItem";
+            this.åbenToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.åbenToolStripMenuItem.Text = "Åben dør";
+            this.åbenToolStripMenuItem.Click += new System.EventHandler(this.åbenToolStripMenuItem_Click);
+            // 
+            // lukDørToolStripMenuItem
+            // 
+            this.lukDørToolStripMenuItem.Name = "lukDørToolStripMenuItem";
+            this.lukDørToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.lukDørToolStripMenuItem.Text = "Luk dør";
+            this.lukDørToolStripMenuItem.Click += new System.EventHandler(this.lukDørToolStripMenuItem_Click);
+            // 
+            // opdaterStatusToolStripMenuItem
+            // 
+            this.opdaterStatusToolStripMenuItem.Name = "opdaterStatusToolStripMenuItem";
+            this.opdaterStatusToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.opdaterStatusToolStripMenuItem.Text = "Opdater status";
+            this.opdaterStatusToolStripMenuItem.Click += new System.EventHandler(this.opdaterStatusToolStripMenuItem_Click);
             // 
             // openAllBtn
             // 
@@ -109,6 +145,7 @@
             this.openAllBtn.Text = "Åben alle";
             this.openAllBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.openAllBtn.UseVisualStyleBackColor = true;
+            this.openAllBtn.Click += new System.EventHandler(this.openAllBtn_Click);
             // 
             // closeAllBtn
             // 
@@ -121,24 +158,27 @@
             this.closeAllBtn.Text = "Luk alle";
             this.closeAllBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.closeAllBtn.UseVisualStyleBackColor = true;
+            this.closeAllBtn.Click += new System.EventHandler(this.closeAllBtn_Click);
             // 
-            // button1
+            // openLogBtn
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.ImageKey = "script.png";
-            this.button1.ImageList = this.icons;
-            this.button1.Location = new System.Drawing.Point(12, 257);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 42);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Åben log";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
+            this.openLogBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.openLogBtn.ImageKey = "script.png";
+            this.openLogBtn.ImageList = this.icons;
+            this.openLogBtn.Location = new System.Drawing.Point(12, 257);
+            this.openLogBtn.Name = "openLogBtn";
+            this.openLogBtn.Size = new System.Drawing.Size(93, 42);
+            this.openLogBtn.TabIndex = 0;
+            this.openLogBtn.Text = "Åben log";
+            this.openLogBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.openLogBtn.UseVisualStyleBackColor = true;
+            this.openLogBtn.Click += new System.EventHandler(this.openLogBtn_Click);
             // 
-            // columnHeader4
+            // slaveUpdateTimer
             // 
-            this.columnHeader4.Text = "Alias";
-            this.columnHeader4.Width = 120;
+            this.slaveUpdateTimer.Enabled = true;
+            this.slaveUpdateTimer.Interval = 200;
+            this.slaveUpdateTimer.Tick += new System.EventHandler(this.slaveUpdateTimer_Tick);
             // 
             // Form1
             // 
@@ -146,7 +186,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 311);
             this.Controls.Add(this.unitList);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.openLogBtn);
             this.Controls.Add(this.closeAllBtn);
             this.Controls.Add(this.openAllBtn);
             this.Controls.Add(this.logoffBtn);
@@ -156,6 +196,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Prison System";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.slaveMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -168,10 +209,14 @@
         private System.Windows.Forms.Button closeAllBtn;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ImageList icons;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button openLogBtn;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ContextMenuStrip slaveMenu;
+        private System.Windows.Forms.ToolStripMenuItem åbenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lukDørToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem opdaterStatusToolStripMenuItem;
+        private System.Windows.Forms.Timer slaveUpdateTimer;
 
     }
 }

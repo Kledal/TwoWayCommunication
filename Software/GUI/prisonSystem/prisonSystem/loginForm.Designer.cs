@@ -78,6 +78,7 @@
             this.Controls.Add(this.statusLbl);
             this.Controls.Add(this.label1);
             this.Name = "loginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Prison System :: Login";
             this.Load += new System.EventHandler(this.loginForm_Load);
             this.ResumeLayout(false);
