@@ -94,6 +94,10 @@ namespace prisonSystem
                         if (Program.mode == 5)
                             Program.mode = 7;
                         break;
+                    case "R": // Master is ready again.
+                        Program.WriteLog("Master is ready again.");
+                        Program.masterReady = true;
+                        break;
                     default:
                         //Program.WriteLog("Didnt recognize data: " + data);
                         break;
@@ -136,6 +140,7 @@ namespace prisonSystem
         private void åbenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Slave s = Program.GetSlaveByAddr(getSelectedAddr());
+            s.SetState("Åbner");
             Program.WriteLog("Open cmd called on slave: " + s.Address + ".");
             s.SendMessage(CMD.Open);
         }
@@ -143,6 +148,7 @@ namespace prisonSystem
         private void lukDørToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Slave s = Program.GetSlaveByAddr(getSelectedAddr());
+            s.SetState("Lukker");
             Program.WriteLog("Close cmd called on slave: " + s.Address + ".");
             s.SendMessage(CMD.Close);
         }
@@ -162,6 +168,30 @@ namespace prisonSystem
                 RedrawSlaves();
                 Program.updateSlaves = false;
             }
+        }
+
+        private void slaveStatusTimer_Tick(object sender, EventArgs e)
+        {
+            if (!Program.masterReady)
+                return;
+
+            Slave s = Program.GetSlaves().First();
+            s.SendMessage(CMD.Status);
+            _lastSlave = s;
+        }
+
+        private void commandQueueTimer_Tick(object sender, EventArgs e)
+        {
+            if (Program.commandqueue.Count == 0)
+                return;
+
+            if (!Program.masterReady)
+            {
+                Program.WriteLog("Master not ready");
+                return;
+            }
+
+            Program.GetSerial().SendData( Program.commandqueue.Pop() );
         }
     }
 }

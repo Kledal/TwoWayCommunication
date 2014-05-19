@@ -44,6 +44,8 @@
             this.closeAllBtn = new System.Windows.Forms.Button();
             this.openLogBtn = new System.Windows.Forms.Button();
             this.slaveUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.slaveStatusTimer = new System.Windows.Forms.Timer(this.components);
+            this.commandQueueTimer = new System.Windows.Forms.Timer(this.components);
             this.slaveMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -177,8 +179,18 @@
             // slaveUpdateTimer
             // 
             this.slaveUpdateTimer.Enabled = true;
-            this.slaveUpdateTimer.Interval = 200;
             this.slaveUpdateTimer.Tick += new System.EventHandler(this.slaveUpdateTimer_Tick);
+            // 
+            // slaveStatusTimer
+            // 
+            this.slaveStatusTimer.Enabled = true;
+            this.slaveStatusTimer.Interval = 1000;
+            this.slaveStatusTimer.Tick += new System.EventHandler(this.slaveStatusTimer_Tick);
+            // 
+            // commandQueueTimer
+            // 
+            this.commandQueueTimer.Enabled = true;
+            this.commandQueueTimer.Tick += new System.EventHandler(this.commandQueueTimer_Tick);
             // 
             // Form1
             // 
@@ -217,6 +229,8 @@
         private System.Windows.Forms.ToolStripMenuItem lukDørToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opdaterStatusToolStripMenuItem;
         private System.Windows.Forms.Timer slaveUpdateTimer;
+        private System.Windows.Forms.Timer slaveStatusTimer;
+        private System.Windows.Forms.Timer commandQueueTimer;
 
     }
 }

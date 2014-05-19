@@ -44,10 +44,17 @@ namespace prisonSystem
             if (!_port.IsOpen)
                 return;
 
+            if (!Program.masterReady)
+            {
+                Program.WriteLog("Trying to send, but master isnt ready.");
+                return;
+            }
+
             byte[] buffer = Encoding.ASCII.GetBytes(data + (char)13);
             _port.Write(buffer, 0, buffer.Length);
 
             Program.WriteLog("Data transmitted via serial: " + data);
+            Program.masterReady = false;
         }
 
         void _port_DataReceived(object sender, SerialDataReceivedEventArgs e)

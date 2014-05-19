@@ -21,7 +21,8 @@ namespace prisonSystem
 
         public void SendMessage(CMD message)
         {
-            Program.GetSerial().SendData(Program._commands[(int)CMD.StartBit] + _addr + Program._commands[(int)message]);
+            string cmd = Program._commands[(int)CMD.StartBit] + _addr + Program._commands[(int)message];
+            Program.commandqueue.Push(cmd);
         }
 
         public void SetState(string state)
