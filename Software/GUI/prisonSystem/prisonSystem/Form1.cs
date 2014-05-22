@@ -60,7 +60,15 @@ namespace prisonSystem
                 item.Text = slave.Address;
 
                 item.SubItems.Add(slave.Name);
-                item.SubItems.Add(slave.State);
+
+                if (slave.Alarm)
+                {
+                    item.SubItems.Add("ALARM!");
+                }
+                else
+                {
+                    item.SubItems.Add(slave.State);
+                }
 
                 item.UseItemStyleForSubItems = false;
 
@@ -177,8 +185,11 @@ namespace prisonSystem
                 return;
 
             Slave s = Program.GetSlaves().First();
-            s.SendMessage(CMD.Status);
-            _lastSlave = s;
+            if (s.ReadyNextMsg())
+            {
+                s.SendMessage(CMD.Status);
+                _lastSlave = s;
+            }
         }
 
         private void commandQueueTimer_Tick(object sender, EventArgs e)
