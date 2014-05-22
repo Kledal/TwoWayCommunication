@@ -26,9 +26,6 @@ namespace prisonSystem
         static public int mode = 0;
         static public bool updateSlaves = false;
 
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {

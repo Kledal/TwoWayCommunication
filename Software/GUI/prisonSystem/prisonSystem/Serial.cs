@@ -14,7 +14,6 @@ namespace prisonSystem
 
         public delegate void dataReceived(object source, string data);
         public event dataReceived DataReceived;
-
         private StringBuilder _buffer = new StringBuilder();
 
         public Serial(string comport = "COM5")

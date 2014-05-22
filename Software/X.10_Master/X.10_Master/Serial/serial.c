@@ -183,7 +183,7 @@ ISR(USART_RXC_vect)
       // Load uart data into sendinfo array.
       int i;
         for(i = 0;i<sizeof(sendInfo);i++) {
-        sendInfo[i] = uart_data[i];
+          sendInfo[i] = uart_data[i];
         }
         if (sendInfo[14] == '1' && sendInfo[17] == '1')
             changeStatus = 1;

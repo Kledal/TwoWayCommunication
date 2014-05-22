@@ -39,19 +39,8 @@ int main(void)
     while(1)
     {
     	while(!okPw()) {}
-		while(!okLogin()) {}
+			while(!okLogin()) {}
 
-		// Not logged in, lets check -- *** needs to be a while loop in a while loop ***
-		// if the DE-2 is outputting
-		if (!getLoginStatus()) {
-
-		}
-		/*
-		 We are logged in, lets process new data.
-		*/
-		if (getLoginStatus()) {
-			SendString("k");	//Communicates to that ATMega is ready to send data
-		}
     }
 }
 
