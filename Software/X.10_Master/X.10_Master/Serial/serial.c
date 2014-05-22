@@ -154,13 +154,13 @@ ISR(USART_RXC_vect)
     uart_count++;
   }else{
 
-    int isHandled = 1;
+    int isHandled = 0;
 
     switch (uart_data[0])
     {
       case 'O':
         SendString("O");
-        isHandled = 0;
+        isHandled = 1;
       break;
       case 'S':
          if (getPwStatus()) {
@@ -173,12 +173,11 @@ ISR(USART_RXC_vect)
           SendString("L");
           SendChar(endbyte);
         }
-        isHandled = 0;
+        isHandled = 1;
       break;
     }
 
-
-    if (isHandled) {
+    if (!isHandled) {
       clearArray(sendInfo);
       // Load uart data into sendinfo array.
       int i;
@@ -195,7 +194,6 @@ ISR(USART_RXC_vect)
     // Clear uart_data.
     clearArray(uart_data);
   }
-
 }
 
 /**************************************************/

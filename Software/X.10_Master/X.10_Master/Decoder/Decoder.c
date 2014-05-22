@@ -13,6 +13,10 @@ unsigned char arraySizeCounter = 0;
 // Serial Master-to-PC variable
 char endByte = 13;
 
+// Number of zero cross without startbit, before quitting listning mode
+int max_zero_cross = 30;
+int zero_cross = 0;
+
 // Loading arrays
 unsigned char startbit[4] = {0,0,0,0};
 unsigned char addressbit[8] = {0,0,0,0,0,0,0,0};
@@ -45,10 +49,15 @@ void readDataBit() {
 	if (isLoadingCmdArray) {
 		loadShiftLeft(cmdbit, loadingBit, 4);
 		arraySizeCounter++;
+	}
+	
+	if (zero_cross > max_zero_cross && isLoadingStartArray) {
+		resetListening();
 	}	
-		
+	
 	// We check to see if we need to switch to address array
 	checkArrayStatus();
+	zero_cross++;
 }
 
 void checkArrayStatus() {
@@ -93,6 +102,11 @@ void resetListening() {
 	clearArray(addressbit, 8);
 	clearArray(cmdbit, 4);
 	isLoadingStartArray = 1;
+	zero_cross = 0;
+	isListening = 0;
+	
+	SendString("K");
+	SendChar(endByte);
 }
 
 char getListening() {
