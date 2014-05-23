@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for LoginBoard
-Mon Apr 14 18:17:11 2014
+Fri May 23 13:04:30 2014
 Quartus II 32-bit Version 12.1 Build 177 11/07/2012 SJ Full Version
 
 
@@ -127,56 +127,56 @@ No paths to report.
 No paths to report.
 
 
-+---------------------------------------------------------------+
-; Propagation Delay                                             ;
-+-----------------+-------------+-------+-------+-------+-------+
-; Input Port      ; Output Port ; RR    ; RF    ; FR    ; FF    ;
-+-----------------+-------------+-------+-------+-------+-------+
-; login           ; okLogin     ;       ; 9.533 ; 9.533 ;       ;
-; login           ; okPw        ;       ; 9.764 ; 9.764 ;       ;
-; passswitches[0] ; okLogin     ;       ; 5.567 ; 5.567 ;       ;
-; passswitches[0] ; okPw        ;       ; 5.524 ; 5.524 ;       ;
-; passswitches[1] ; okLogin     ;       ; 5.615 ; 5.615 ;       ;
-; passswitches[1] ; okPw        ; 5.543 ;       ;       ; 5.543 ;
-; passswitches[2] ; okLogin     ;       ; 5.432 ; 5.432 ;       ;
-; passswitches[2] ; okPw        ;       ; 5.389 ; 5.389 ;       ;
-; passswitches[3] ; okLogin     ;       ; 7.471 ; 7.471 ;       ;
-; passswitches[3] ; okPw        ; 7.399 ;       ;       ; 7.399 ;
-; passswitches[4] ; okLogin     ;       ; 7.717 ; 7.717 ;       ;
-; passswitches[4] ; okPw        ;       ; 7.674 ; 7.674 ;       ;
-; passswitches[5] ; okLogin     ;       ; 7.659 ; 7.659 ;       ;
-; passswitches[5] ; okPw        ; 7.606 ;       ;       ; 7.606 ;
-; passswitches[6] ; okLogin     ;       ; 7.355 ; 7.355 ;       ;
-; passswitches[6] ; okPw        ;       ; 7.312 ; 7.312 ;       ;
-; passswitches[7] ; okLogin     ;       ; 6.956 ; 6.956 ;       ;
-; passswitches[7] ; okPw        ;       ; 6.681 ; 6.681 ;       ;
-+-----------------+-------------+-------+-------+-------+-------+
++-----------------------------------------------------------------+
+; Propagation Delay                                               ;
++-----------------+-------------+-------+--------+--------+-------+
+; Input Port      ; Output Port ; RR    ; RF     ; FR     ; FF    ;
++-----------------+-------------+-------+--------+--------+-------+
+; login           ; okLogin     ;       ; 10.086 ; 10.086 ;       ;
+; login           ; okPw        ;       ; 10.270 ; 10.270 ;       ;
+; passswitches[0] ; okLogin     ;       ; 5.698  ; 5.698  ;       ;
+; passswitches[0] ; okPw        ;       ; 5.988  ; 5.988  ;       ;
+; passswitches[1] ; okLogin     ;       ; 5.974  ; 5.974  ;       ;
+; passswitches[1] ; okPw        ; 5.747 ;        ;        ; 5.747 ;
+; passswitches[2] ; okLogin     ;       ; 5.840  ; 5.840  ;       ;
+; passswitches[2] ; okPw        ;       ; 6.130  ; 6.130  ;       ;
+; passswitches[3] ; okLogin     ;       ; 7.582  ; 7.582  ;       ;
+; passswitches[3] ; okPw        ; 7.355 ;        ;        ; 7.355 ;
+; passswitches[4] ; okLogin     ;       ; 7.494  ; 7.494  ;       ;
+; passswitches[4] ; okPw        ;       ; 7.784  ; 7.784  ;       ;
+; passswitches[5] ; okLogin     ;       ; 7.698  ; 7.698  ;       ;
+; passswitches[5] ; okPw        ; 7.488 ;        ;        ; 7.488 ;
+; passswitches[6] ; okLogin     ;       ; 7.317  ; 7.317  ;       ;
+; passswitches[6] ; okPw        ;       ; 7.607  ; 7.607  ;       ;
+; passswitches[7] ; okLogin     ;       ; 7.107  ; 7.107  ;       ;
+; passswitches[7] ; okPw        ;       ; 7.064  ; 7.064  ;       ;
++-----------------+-------------+-------+--------+--------+-------+
 
 
-+---------------------------------------------------------------+
-; Minimum Propagation Delay                                     ;
-+-----------------+-------------+-------+-------+-------+-------+
-; Input Port      ; Output Port ; RR    ; RF    ; FR    ; FF    ;
-+-----------------+-------------+-------+-------+-------+-------+
-; login           ; okLogin     ;       ; 9.533 ; 9.533 ;       ;
-; login           ; okPw        ;       ; 9.764 ; 9.764 ;       ;
-; passswitches[0] ; okLogin     ;       ; 5.567 ; 5.567 ;       ;
-; passswitches[0] ; okPw        ;       ; 5.524 ; 5.524 ;       ;
-; passswitches[1] ; okLogin     ;       ; 5.615 ; 5.615 ;       ;
-; passswitches[1] ; okPw        ; 5.543 ;       ;       ; 5.543 ;
-; passswitches[2] ; okLogin     ;       ; 5.432 ; 5.432 ;       ;
-; passswitches[2] ; okPw        ;       ; 5.389 ; 5.389 ;       ;
-; passswitches[3] ; okLogin     ;       ; 7.471 ; 7.471 ;       ;
-; passswitches[3] ; okPw        ; 7.399 ;       ;       ; 7.399 ;
-; passswitches[4] ; okLogin     ;       ; 7.717 ; 7.717 ;       ;
-; passswitches[4] ; okPw        ;       ; 7.674 ; 7.674 ;       ;
-; passswitches[5] ; okLogin     ;       ; 7.659 ; 7.659 ;       ;
-; passswitches[5] ; okPw        ; 7.606 ;       ;       ; 7.606 ;
-; passswitches[6] ; okLogin     ;       ; 7.355 ; 7.355 ;       ;
-; passswitches[6] ; okPw        ;       ; 7.312 ; 7.312 ;       ;
-; passswitches[7] ; okLogin     ;       ; 6.956 ; 6.956 ;       ;
-; passswitches[7] ; okPw        ;       ; 6.681 ; 6.681 ;       ;
-+-----------------+-------------+-------+-------+-------+-------+
++-----------------------------------------------------------------+
+; Minimum Propagation Delay                                       ;
++-----------------+-------------+-------+--------+--------+-------+
+; Input Port      ; Output Port ; RR    ; RF     ; FR     ; FF    ;
++-----------------+-------------+-------+--------+--------+-------+
+; login           ; okLogin     ;       ; 10.086 ; 10.086 ;       ;
+; login           ; okPw        ;       ; 10.270 ; 10.270 ;       ;
+; passswitches[0] ; okLogin     ;       ; 5.698  ; 5.698  ;       ;
+; passswitches[0] ; okPw        ;       ; 5.988  ; 5.988  ;       ;
+; passswitches[1] ; okLogin     ;       ; 5.974  ; 5.974  ;       ;
+; passswitches[1] ; okPw        ; 5.747 ;        ;        ; 5.747 ;
+; passswitches[2] ; okLogin     ;       ; 5.840  ; 5.840  ;       ;
+; passswitches[2] ; okPw        ;       ; 6.130  ; 6.130  ;       ;
+; passswitches[3] ; okLogin     ;       ; 7.582  ; 7.582  ;       ;
+; passswitches[3] ; okPw        ; 7.355 ;        ;        ; 7.355 ;
+; passswitches[4] ; okLogin     ;       ; 7.494  ; 7.494  ;       ;
+; passswitches[4] ; okPw        ;       ; 7.784  ; 7.784  ;       ;
+; passswitches[5] ; okLogin     ;       ; 7.698  ; 7.698  ;       ;
+; passswitches[5] ; okPw        ; 7.488 ;        ;        ; 7.488 ;
+; passswitches[6] ; okLogin     ;       ; 7.317  ; 7.317  ;       ;
+; passswitches[6] ; okPw        ;       ; 7.607  ; 7.607  ;       ;
+; passswitches[7] ; okLogin     ;       ; 7.107  ; 7.107  ;       ;
+; passswitches[7] ; okPw        ;       ; 7.064  ; 7.064  ;       ;
++-----------------+-------------+-------+--------+--------+-------+
 
 
 ----------------------------
@@ -214,24 +214,24 @@ No paths to report.
 +-----------------+-------------+-------+-------+-------+-------+
 ; Input Port      ; Output Port ; RR    ; RF    ; FR    ; FF    ;
 +-----------------+-------------+-------+-------+-------+-------+
-; login           ; okLogin     ;       ; 5.350 ; 5.350 ;       ;
-; login           ; okPw        ;       ; 5.466 ; 5.466 ;       ;
-; passswitches[0] ; okLogin     ;       ; 2.873 ; 2.873 ;       ;
-; passswitches[0] ; okPw        ;       ; 2.847 ; 2.847 ;       ;
-; passswitches[1] ; okLogin     ;       ; 2.881 ; 2.881 ;       ;
-; passswitches[1] ; okPw        ; 2.848 ;       ;       ; 2.848 ;
-; passswitches[2] ; okLogin     ;       ; 2.818 ; 2.818 ;       ;
-; passswitches[2] ; okPw        ;       ; 2.792 ; 2.792 ;       ;
-; passswitches[3] ; okLogin     ;       ; 3.820 ; 3.820 ;       ;
-; passswitches[3] ; okPw        ; 3.809 ;       ;       ; 3.809 ;
-; passswitches[4] ; okLogin     ;       ; 4.014 ; 4.014 ;       ;
-; passswitches[4] ; okPw        ;       ; 3.988 ; 3.988 ;       ;
-; passswitches[5] ; okLogin     ;       ; 3.915 ; 3.915 ;       ;
-; passswitches[5] ; okPw        ; 3.881 ;       ;       ; 3.881 ;
-; passswitches[6] ; okLogin     ;       ; 3.805 ; 3.805 ;       ;
-; passswitches[6] ; okPw        ;       ; 3.779 ; 3.779 ;       ;
-; passswitches[7] ; okLogin     ;       ; 3.637 ; 3.637 ;       ;
-; passswitches[7] ; okPw        ;       ; 3.489 ; 3.489 ;       ;
+; login           ; okLogin     ;       ; 5.585 ; 5.585 ;       ;
+; login           ; okPw        ;       ; 5.695 ; 5.695 ;       ;
+; passswitches[0] ; okLogin     ;       ; 2.909 ; 2.909 ;       ;
+; passswitches[0] ; okPw        ;       ; 3.066 ; 3.066 ;       ;
+; passswitches[1] ; okLogin     ;       ; 3.043 ; 3.043 ;       ;
+; passswitches[1] ; okPw        ; 2.942 ;       ;       ; 2.942 ;
+; passswitches[2] ; okLogin     ;       ; 2.969 ; 2.969 ;       ;
+; passswitches[2] ; okPw        ;       ; 3.126 ; 3.126 ;       ;
+; passswitches[3] ; okLogin     ;       ; 3.868 ; 3.868 ;       ;
+; passswitches[3] ; okPw        ; 3.789 ;       ;       ; 3.789 ;
+; passswitches[4] ; okLogin     ;       ; 3.857 ; 3.857 ;       ;
+; passswitches[4] ; okPw        ;       ; 4.014 ; 4.014 ;       ;
+; passswitches[5] ; okLogin     ;       ; 3.943 ; 3.943 ;       ;
+; passswitches[5] ; okPw        ; 3.840 ;       ;       ; 3.840 ;
+; passswitches[6] ; okLogin     ;       ; 3.753 ; 3.753 ;       ;
+; passswitches[6] ; okPw        ;       ; 3.910 ; 3.910 ;       ;
+; passswitches[7] ; okLogin     ;       ; 3.694 ; 3.694 ;       ;
+; passswitches[7] ; okPw        ;       ; 3.656 ; 3.656 ;       ;
 +-----------------+-------------+-------+-------+-------+-------+
 
 
@@ -240,24 +240,24 @@ No paths to report.
 +-----------------+-------------+-------+-------+-------+-------+
 ; Input Port      ; Output Port ; RR    ; RF    ; FR    ; FF    ;
 +-----------------+-------------+-------+-------+-------+-------+
-; login           ; okLogin     ;       ; 5.350 ; 5.350 ;       ;
-; login           ; okPw        ;       ; 5.466 ; 5.466 ;       ;
-; passswitches[0] ; okLogin     ;       ; 2.873 ; 2.873 ;       ;
-; passswitches[0] ; okPw        ;       ; 2.847 ; 2.847 ;       ;
-; passswitches[1] ; okLogin     ;       ; 2.881 ; 2.881 ;       ;
-; passswitches[1] ; okPw        ; 2.848 ;       ;       ; 2.848 ;
-; passswitches[2] ; okLogin     ;       ; 2.818 ; 2.818 ;       ;
-; passswitches[2] ; okPw        ;       ; 2.792 ; 2.792 ;       ;
-; passswitches[3] ; okLogin     ;       ; 3.820 ; 3.820 ;       ;
-; passswitches[3] ; okPw        ; 3.809 ;       ;       ; 3.809 ;
-; passswitches[4] ; okLogin     ;       ; 4.014 ; 4.014 ;       ;
-; passswitches[4] ; okPw        ;       ; 3.988 ; 3.988 ;       ;
-; passswitches[5] ; okLogin     ;       ; 3.915 ; 3.915 ;       ;
-; passswitches[5] ; okPw        ; 3.881 ;       ;       ; 3.881 ;
-; passswitches[6] ; okLogin     ;       ; 3.805 ; 3.805 ;       ;
-; passswitches[6] ; okPw        ;       ; 3.779 ; 3.779 ;       ;
-; passswitches[7] ; okLogin     ;       ; 3.637 ; 3.637 ;       ;
-; passswitches[7] ; okPw        ;       ; 3.489 ; 3.489 ;       ;
+; login           ; okLogin     ;       ; 5.585 ; 5.585 ;       ;
+; login           ; okPw        ;       ; 5.695 ; 5.695 ;       ;
+; passswitches[0] ; okLogin     ;       ; 2.909 ; 2.909 ;       ;
+; passswitches[0] ; okPw        ;       ; 3.066 ; 3.066 ;       ;
+; passswitches[1] ; okLogin     ;       ; 3.043 ; 3.043 ;       ;
+; passswitches[1] ; okPw        ; 2.942 ;       ;       ; 2.942 ;
+; passswitches[2] ; okLogin     ;       ; 2.969 ; 2.969 ;       ;
+; passswitches[2] ; okPw        ;       ; 3.126 ; 3.126 ;       ;
+; passswitches[3] ; okLogin     ;       ; 3.868 ; 3.868 ;       ;
+; passswitches[3] ; okPw        ; 3.789 ;       ;       ; 3.789 ;
+; passswitches[4] ; okLogin     ;       ; 3.857 ; 3.857 ;       ;
+; passswitches[4] ; okPw        ;       ; 4.014 ; 4.014 ;       ;
+; passswitches[5] ; okLogin     ;       ; 3.943 ; 3.943 ;       ;
+; passswitches[5] ; okPw        ; 3.840 ;       ;       ; 3.840 ;
+; passswitches[6] ; okLogin     ;       ; 3.753 ; 3.753 ;       ;
+; passswitches[6] ; okPw        ;       ; 3.910 ; 3.910 ;       ;
+; passswitches[7] ; okLogin     ;       ; 3.694 ; 3.694 ;       ;
+; passswitches[7] ; okPw        ;       ; 3.656 ; 3.656 ;       ;
 +-----------------+-------------+-------+-------+-------+-------+
 
 
@@ -271,30 +271,30 @@ No paths to report.
 +------------------+-------+------+----------+---------+---------------------+
 
 
-+---------------------------------------------------------------+
-; Progagation Delay                                             ;
-+-----------------+-------------+-------+-------+-------+-------+
-; Input Port      ; Output Port ; RR    ; RF    ; FR    ; FF    ;
-+-----------------+-------------+-------+-------+-------+-------+
-; login           ; okLogin     ;       ; 9.533 ; 9.533 ;       ;
-; login           ; okPw        ;       ; 9.764 ; 9.764 ;       ;
-; passswitches[0] ; okLogin     ;       ; 5.567 ; 5.567 ;       ;
-; passswitches[0] ; okPw        ;       ; 5.524 ; 5.524 ;       ;
-; passswitches[1] ; okLogin     ;       ; 5.615 ; 5.615 ;       ;
-; passswitches[1] ; okPw        ; 5.543 ;       ;       ; 5.543 ;
-; passswitches[2] ; okLogin     ;       ; 5.432 ; 5.432 ;       ;
-; passswitches[2] ; okPw        ;       ; 5.389 ; 5.389 ;       ;
-; passswitches[3] ; okLogin     ;       ; 7.471 ; 7.471 ;       ;
-; passswitches[3] ; okPw        ; 7.399 ;       ;       ; 7.399 ;
-; passswitches[4] ; okLogin     ;       ; 7.717 ; 7.717 ;       ;
-; passswitches[4] ; okPw        ;       ; 7.674 ; 7.674 ;       ;
-; passswitches[5] ; okLogin     ;       ; 7.659 ; 7.659 ;       ;
-; passswitches[5] ; okPw        ; 7.606 ;       ;       ; 7.606 ;
-; passswitches[6] ; okLogin     ;       ; 7.355 ; 7.355 ;       ;
-; passswitches[6] ; okPw        ;       ; 7.312 ; 7.312 ;       ;
-; passswitches[7] ; okLogin     ;       ; 6.956 ; 6.956 ;       ;
-; passswitches[7] ; okPw        ;       ; 6.681 ; 6.681 ;       ;
-+-----------------+-------------+-------+-------+-------+-------+
++-----------------------------------------------------------------+
+; Progagation Delay                                               ;
++-----------------+-------------+-------+--------+--------+-------+
+; Input Port      ; Output Port ; RR    ; RF     ; FR     ; FF    ;
++-----------------+-------------+-------+--------+--------+-------+
+; login           ; okLogin     ;       ; 10.086 ; 10.086 ;       ;
+; login           ; okPw        ;       ; 10.270 ; 10.270 ;       ;
+; passswitches[0] ; okLogin     ;       ; 5.698  ; 5.698  ;       ;
+; passswitches[0] ; okPw        ;       ; 5.988  ; 5.988  ;       ;
+; passswitches[1] ; okLogin     ;       ; 5.974  ; 5.974  ;       ;
+; passswitches[1] ; okPw        ; 5.747 ;        ;        ; 5.747 ;
+; passswitches[2] ; okLogin     ;       ; 5.840  ; 5.840  ;       ;
+; passswitches[2] ; okPw        ;       ; 6.130  ; 6.130  ;       ;
+; passswitches[3] ; okLogin     ;       ; 7.582  ; 7.582  ;       ;
+; passswitches[3] ; okPw        ; 7.355 ;        ;        ; 7.355 ;
+; passswitches[4] ; okLogin     ;       ; 7.494  ; 7.494  ;       ;
+; passswitches[4] ; okPw        ;       ; 7.784  ; 7.784  ;       ;
+; passswitches[5] ; okLogin     ;       ; 7.698  ; 7.698  ;       ;
+; passswitches[5] ; okPw        ; 7.488 ;        ;        ; 7.488 ;
+; passswitches[6] ; okLogin     ;       ; 7.317  ; 7.317  ;       ;
+; passswitches[6] ; okPw        ;       ; 7.607  ; 7.607  ;       ;
+; passswitches[7] ; okLogin     ;       ; 7.107  ; 7.107  ;       ;
+; passswitches[7] ; okPw        ;       ; 7.064  ; 7.064  ;       ;
++-----------------+-------------+-------+--------+--------+-------+
 
 
 +---------------------------------------------------------------+
@@ -302,24 +302,24 @@ No paths to report.
 +-----------------+-------------+-------+-------+-------+-------+
 ; Input Port      ; Output Port ; RR    ; RF    ; FR    ; FF    ;
 +-----------------+-------------+-------+-------+-------+-------+
-; login           ; okLogin     ;       ; 5.350 ; 5.350 ;       ;
-; login           ; okPw        ;       ; 5.466 ; 5.466 ;       ;
-; passswitches[0] ; okLogin     ;       ; 2.873 ; 2.873 ;       ;
-; passswitches[0] ; okPw        ;       ; 2.847 ; 2.847 ;       ;
-; passswitches[1] ; okLogin     ;       ; 2.881 ; 2.881 ;       ;
-; passswitches[1] ; okPw        ; 2.848 ;       ;       ; 2.848 ;
-; passswitches[2] ; okLogin     ;       ; 2.818 ; 2.818 ;       ;
-; passswitches[2] ; okPw        ;       ; 2.792 ; 2.792 ;       ;
-; passswitches[3] ; okLogin     ;       ; 3.820 ; 3.820 ;       ;
-; passswitches[3] ; okPw        ; 3.809 ;       ;       ; 3.809 ;
-; passswitches[4] ; okLogin     ;       ; 4.014 ; 4.014 ;       ;
-; passswitches[4] ; okPw        ;       ; 3.988 ; 3.988 ;       ;
-; passswitches[5] ; okLogin     ;       ; 3.915 ; 3.915 ;       ;
-; passswitches[5] ; okPw        ; 3.881 ;       ;       ; 3.881 ;
-; passswitches[6] ; okLogin     ;       ; 3.805 ; 3.805 ;       ;
-; passswitches[6] ; okPw        ;       ; 3.779 ; 3.779 ;       ;
-; passswitches[7] ; okLogin     ;       ; 3.637 ; 3.637 ;       ;
-; passswitches[7] ; okPw        ;       ; 3.489 ; 3.489 ;       ;
+; login           ; okLogin     ;       ; 5.585 ; 5.585 ;       ;
+; login           ; okPw        ;       ; 5.695 ; 5.695 ;       ;
+; passswitches[0] ; okLogin     ;       ; 2.909 ; 2.909 ;       ;
+; passswitches[0] ; okPw        ;       ; 3.066 ; 3.066 ;       ;
+; passswitches[1] ; okLogin     ;       ; 3.043 ; 3.043 ;       ;
+; passswitches[1] ; okPw        ; 2.942 ;       ;       ; 2.942 ;
+; passswitches[2] ; okLogin     ;       ; 2.969 ; 2.969 ;       ;
+; passswitches[2] ; okPw        ;       ; 3.126 ; 3.126 ;       ;
+; passswitches[3] ; okLogin     ;       ; 3.868 ; 3.868 ;       ;
+; passswitches[3] ; okPw        ; 3.789 ;       ;       ; 3.789 ;
+; passswitches[4] ; okLogin     ;       ; 3.857 ; 3.857 ;       ;
+; passswitches[4] ; okPw        ;       ; 4.014 ; 4.014 ;       ;
+; passswitches[5] ; okLogin     ;       ; 3.943 ; 3.943 ;       ;
+; passswitches[5] ; okPw        ; 3.840 ;       ;       ; 3.840 ;
+; passswitches[6] ; okLogin     ;       ; 3.753 ; 3.753 ;       ;
+; passswitches[6] ; okPw        ;       ; 3.910 ; 3.910 ;       ;
+; passswitches[7] ; okLogin     ;       ; 3.694 ; 3.694 ;       ;
+; passswitches[7] ; okPw        ;       ; 3.656 ; 3.656 ;       ;
 +-----------------+-------------+-------+-------+-------+-------+
 
 
@@ -361,7 +361,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 32-bit TimeQuest Timing Analyzer
     Info: Version 12.1 Build 177 11/07/2012 SJ Full Version
-    Info: Processing started: Mon Apr 14 18:17:10 2014
+    Info: Processing started: Fri May 23 13:04:29 2014
 Info: Command: quartus_sta LoginBoard -c LoginBoard
 Info: qsta_default_script.tcl version: #1
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
@@ -394,8 +394,8 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus II 32-bit TimeQuest Timing Analyzer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 316 megabytes
-    Info: Processing ended: Mon Apr 14 18:17:11 2014
+    Info: Peak virtual memory: 320 megabytes
+    Info: Processing ended: Fri May 23 13:04:30 2014
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

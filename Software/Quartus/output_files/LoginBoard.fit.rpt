@@ -1,5 +1,5 @@
 Fitter report for LoginBoard
-Mon Apr 14 18:17:05 2014
+Fri May 23 13:04:23 2014
 Quartus II 32-bit Version 12.1 Build 177 11/07/2012 SJ Full Version
 
 
@@ -59,7 +59,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Fitter Summary                                                                 ;
 +------------------------------------+-------------------------------------------+
-; Fitter Status                      ; Successful - Mon Apr 14 18:17:05 2014     ;
+; Fitter Status                      ; Successful - Fri May 23 13:04:23 2014     ;
 ; Quartus II 32-bit Version          ; 12.1 Build 177 11/07/2012 SJ Full Version ;
 ; Revision Name                      ; LoginBoard                                ;
 ; Top-level Entity Name              ; LoginBoard                                ;
@@ -136,12 +136,12 @@ applicable agreement for further details.
 ; Number detected on machine ; 4           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.33        ;
+; Average used               ; 1.25        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     1 processor            ; 100.0%      ;
-;     2 processors           ;  20.0%      ;
+;     2 processors           ;  14.3%      ;
 ;     3-4 processors         ;   0.0%      ;
 +----------------------------+-------------+
 
@@ -310,7 +310,7 @@ The pin-out file can be found in C:/Users/Bruger/Documents/GitHub/gruppe2/Softwa
 +-----------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 ; Name            ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination ; Location assigned by ;
 +-----------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
-; login           ; G26   ; 5        ; 65           ; 27           ; 1           ; 2                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; login           ; W26   ; 6        ; 65           ; 10           ; 2           ; 2                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; passswitches[0] ; N25   ; 5        ; 65           ; 19           ; 0           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; passswitches[1] ; N26   ; 5        ; 65           ; 19           ; 1           ; 2                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; passswitches[2] ; P25   ; 6        ; 65           ; 19           ; 2           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
@@ -341,8 +341,8 @@ The pin-out file can be found in C:/Users/Bruger/Documents/GitHub/gruppe2/Softwa
 ; 2        ; 2 / 59 ( 3 % ) ; 3.3V          ; --           ;
 ; 3        ; 1 / 56 ( 2 % ) ; 3.3V          ; --           ;
 ; 4        ; 0 / 58 ( 0 % ) ; 3.3V          ; --           ;
-; 5        ; 5 / 65 ( 8 % ) ; 3.3V          ; --           ;
-; 6        ; 2 / 59 ( 3 % ) ; 3.3V          ; --           ;
+; 5        ; 4 / 65 ( 6 % ) ; 3.3V          ; --           ;
+; 6        ; 3 / 59 ( 5 % ) ; 3.3V          ; --           ;
 ; 7        ; 2 / 58 ( 3 % ) ; 3.3V          ; --           ;
 ; 8        ; 2 / 56 ( 4 % ) ; 3.3V          ; --           ;
 +----------+----------------+---------------+--------------+
@@ -686,7 +686,7 @@ The pin-out file can be found in C:/Users/Bruger/Documents/GitHub/gruppe2/Softwa
 ; G23      ; 346        ; 5        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; G24      ; 345        ; 5        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; G25      ; 343        ; 5        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; G26      ; 342        ; 5        ; login                                    ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; G26      ; 342        ; 5        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; H1       ; 37         ; 2        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; H2       ; 36         ; 2        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; H3       ; 32         ; 2        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
@@ -998,7 +998,7 @@ The pin-out file can be found in C:/Users/Bruger/Documents/GitHub/gruppe2/Softwa
 ; W23      ; 272        ; 6        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; W24      ; 271        ; 6        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; W25      ; 273        ; 6        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; W26      ; 274        ; 6        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; W26      ; 274        ; 6        ; login                                    ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; Y1       ; 103        ; 1        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; Y2       ;            ;          ; NC                                       ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; Y3       ; 108        ; 1        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
@@ -1143,12 +1143,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------+-----------------------+
 ; Block interconnects         ; 11 / 94,460 ( < 1 % ) ;
 ; C16 interconnects           ; 9 / 3,315 ( < 1 % )   ;
-; C4 interconnects            ; 6 / 60,840 ( < 1 % )  ;
+; C4 interconnects            ; 5 / 60,840 ( < 1 % )  ;
 ; Direct links                ; 0 / 94,460 ( 0 % )    ;
 ; Global clocks               ; 0 / 16 ( 0 % )        ;
 ; Local interconnects         ; 3 / 33,216 ( < 1 % )  ;
-; R24 interconnects           ; 7 / 3,091 ( < 1 % )   ;
-; R4 interconnects            ; 7 / 81,294 ( < 1 % )  ;
+; R24 interconnects           ; 6 / 3,091 ( < 1 % )   ;
+; R4 interconnects            ; 14 / 81,294 ( < 1 % ) ;
 +-----------------------------+-----------------------+
 
 
@@ -1254,7 +1254,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Fitter
     Info: Version 12.1 Build 177 11/07/2012 SJ Full Version
-    Info: Processing started: Mon Apr 14 18:17:00 2014
+    Info: Processing started: Fri May 23 13:04:15 2014
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off LoginBoard -c LoginBoard
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
 Info (119006): Selected device EP2C35F672C6 for design "LoginBoard"
@@ -1276,7 +1276,7 @@ Info (332130): Timing requirements not specified -- quality metrics such as perf
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info (170191): Fitter placement operations beginning
@@ -1296,14 +1296,14 @@ Warning (306006): Found 2 output pins without output pin load capacitance assign
 Info (306005): Delay annotation completed successfully
 Info (306004): Started post-fitting delay annotation
 Info (306005): Delay annotation completed successfully
-Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
+Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
 Info (144001): Generated suppressed messages file C:/Users/Bruger/Documents/GitHub/gruppe2/Software/Quartus/output_files/LoginBoard.fit.smsg
 Info: Quartus II 32-bit Fitter was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 491 megabytes
-    Info: Processing ended: Mon Apr 14 18:17:05 2014
-    Info: Elapsed time: 00:00:05
-    Info: Total CPU time (on all processors): 00:00:06
+    Info: Peak virtual memory: 495 megabytes
+    Info: Processing ended: Fri May 23 13:04:23 2014
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:08
 
 
 +----------------------------+
