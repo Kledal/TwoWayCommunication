@@ -115,6 +115,10 @@ void resetListening() {
 	isLoadingStartArray = 1;
 }
 
+void setListening(char setme) {
+	isListening = setme;
+}
+
 char getListening() {
 	return isListening;
 }

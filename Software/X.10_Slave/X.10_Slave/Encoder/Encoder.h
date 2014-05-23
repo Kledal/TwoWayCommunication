@@ -14,7 +14,7 @@ char getSendingStatus();
 void sendDataBit();
 
 unsigned char sendInfo[17];
-unsigned char sendCount;
+int sendCount;
 unsigned char isSending;
 unsigned char startSequence[4];
 

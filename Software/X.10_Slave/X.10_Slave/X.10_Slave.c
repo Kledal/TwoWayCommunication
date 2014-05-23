@@ -72,7 +72,7 @@ ISR(INT1_vect) {
 	if (getSendingStatus() == 1)
 		sendDataBit();
 		
-	if (getListening() == 1)
+	if (getListening() == 1	)
 		readDataBit();	
 
 	sei();
