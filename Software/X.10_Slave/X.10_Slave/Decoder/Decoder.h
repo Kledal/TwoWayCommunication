@@ -21,6 +21,7 @@ void readDataBit();
 void runCommand();
 void resetListening();
 char getListening();
+void setListening(char);
 void checkSendMessage();
 void loadStartArray();
 void loadAddressArray();

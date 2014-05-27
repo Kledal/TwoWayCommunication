@@ -401,7 +401,7 @@ GND*                         : G22       :        :                   :         
 GND*                         : G23       :        :                   :         : 5         :                
 GND*                         : G24       :        :                   :         : 5         :                
 GND*                         : G25       :        :                   :         : 5         :                
-login                        : G26       : input  : 3.3-V LVTTL       :         : 5         : Y              
+GND*                         : G26       :        :                   :         : 5         :                
 GND*                         : H1        :        :                   :         : 2         :                
 GND*                         : H2        :        :                   :         : 2         :                
 GND*                         : H3        :        :                   :         : 2         :                
@@ -713,7 +713,7 @@ GND                          : W22       : gnd    :                   :         
 GND*                         : W23       :        :                   :         : 6         :                
 GND*                         : W24       :        :                   :         : 6         :                
 GND*                         : W25       :        :                   :         : 6         :                
-GND*                         : W26       :        :                   :         : 6         :                
+login                        : W26       : input  : 3.3-V LVTTL       :         : 6         : Y              
 GND*                         : Y1        :        :                   :         : 1         :                
 NC                           : Y2        :        :                   :         :           :                
 GND*                         : Y3        :        :                   :         : 1         :                

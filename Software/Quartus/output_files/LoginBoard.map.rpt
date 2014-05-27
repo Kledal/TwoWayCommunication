@@ -1,5 +1,5 @@
 Analysis & Synthesis report for LoginBoard
-Mon Apr 14 18:16:59 2014
+Fri May 23 13:04:14 2014
 Quartus II 32-bit Version 12.1 Build 177 11/07/2012 SJ Full Version
 
 
@@ -41,7 +41,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                   ;
 +------------------------------------+-------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Apr 14 18:16:59 2014     ;
+; Analysis & Synthesis Status        ; Successful - Fri May 23 13:04:14 2014     ;
 ; Quartus II 32-bit Version          ; 12.1 Build 177 11/07/2012 SJ Full Version ;
 ; Revision Name                      ; LoginBoard                                ;
 ; Top-level Entity Name              ; LoginBoard                                ;
@@ -238,7 +238,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 12.1 Build 177 11/07/2012 SJ Full Version
-    Info: Processing started: Mon Apr 14 18:16:57 2014
+    Info: Processing started: Fri May 23 13:04:10 2014
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off LoginBoard -c LoginBoard
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
 Info (12021): Found 2 design units, including 1 entities, in source file loginboard.vhd
@@ -255,9 +255,9 @@ Info (21057): Implemented 16 device resources after synthesis - the final resour
     Info (21059): Implemented 2 output pins
     Info (21061): Implemented 5 logic cells
 Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 383 megabytes
-    Info: Processing ended: Mon Apr 14 18:16:59 2014
-    Info: Elapsed time: 00:00:02
+    Info: Peak virtual memory: 387 megabytes
+    Info: Processing ended: Fri May 23 13:04:14 2014
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:02
 
 

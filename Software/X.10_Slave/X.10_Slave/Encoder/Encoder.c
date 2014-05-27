@@ -5,7 +5,7 @@
  Send variables
 */
 unsigned char sendInfo[17] = "";
-unsigned char sendCount = 0;
+int sendCount = 0;
 unsigned char isSending = 0;
 unsigned char startSequence[4] = {1, 1, 1, 0};
 
@@ -33,14 +33,14 @@ void sendCommand(char address[8], char cmd[4])
 	
 	sendInfo[0] = 0;
 	
-	for (i=0;i<sizeof(startSequence);i++) {
+	for (i=0;i<4;i++) {
 		sendInfo[i + 1] = startSequence[i];
 	}
-	for (i=0;i<sizeof(address);i++)
+	for (i=0;i<8;i++)
 	{
 		sendInfo[i + 5] = address[i];
 	}
-	for (i=0;i<sizeof(cmd);i++)
+	for (i=0;i<4;i++)
 	{
 		sendInfo[i + 13] = cmd[i];
 	}
@@ -48,10 +48,10 @@ void sendCommand(char address[8], char cmd[4])
 	isSending = 1;
 	
 	SendString("\n\rDatapakken, sendInfo, indeholder:");
-	for (i=0; i< sizeof(startbit); i++)
+	for (i=0; i< 17; i++)
  		SendInteger(sendInfo[i]);
 		 
-	SendString("\n\r");
+	SendString("\n\rVi sender: ");
 }
 
 char getSendingStatus() {
@@ -61,10 +61,17 @@ char getSendingStatus() {
 void sendDataBit() {
 	unsigned char bit = sendInfo[sendCount];
 	//we need to check against string, because that is what we are receiving over
-	if (bit == '1')
+	if (bit == 1)
 		sendData();
-
+		
+	SendInteger(bit);
+	
 	sendCount++;
-	if (sendCount > sizeof(sendInfo))
+	
+	if (sendCount > 17) {
+		sendCount = 0;
 		isSending = 0;
+		setListening(1);
+		SendString("\n\rVi er faerdig med at sende. \n\r");
+	}		
 }
