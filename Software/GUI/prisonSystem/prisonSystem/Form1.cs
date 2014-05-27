@@ -92,8 +92,11 @@ namespace prisonSystem
                         Program.WriteLog("Got online status from STK500.");
                         break;
                     case "S":
+                        Program.WriteLog("Got status: " + args[1]);
                         int pos = Array.IndexOf(Program._commands, args[1]);
-                        Program.GetSlaveByAddr(_lastSlave.Address).SetState(Program._humancmds[pos]);
+                        Slave s = Program.GetSlaveByAddr(_lastSlave.Address);
+                        s.SetState(Program._humancmds[pos]);
+                        s.RequestedNewState = false;
                         Program.updateSlaves = true;
                         break;
                     case "K":
@@ -108,7 +111,7 @@ namespace prisonSystem
                         Program.masterReady = true;
                         break;
                     default:
-                        //Program.WriteLog("Didnt recognize data: " + data);
+                        Program.WriteLog("Didnt recognize data: " + data);
                         break;
                 }
             }
@@ -120,6 +123,7 @@ namespace prisonSystem
 
         private void logoffBtn_Click(object sender, EventArgs e)
         {
+            Program.mode = 0;
             this.shouldHide = false;
             this.Hide();
             showLoginForm();
@@ -134,40 +138,77 @@ namespace prisonSystem
         private void openAllBtn_Click(object sender, EventArgs e)
         {
             Program.GetSerial().SendPublicData(CMD.Open);
+            foreach (Slave s in Program.GetSlaves())
+            {
+                s.RequestedNewState = true;
+                s.SetState("Åbner");
+            }
+            Program.updateSlaves = true;
         }
 
         private void closeAllBtn_Click(object sender, EventArgs e)
         {
             Program.GetSerial().SendPublicData(CMD.Close);
+            foreach (Slave s in Program.GetSlaves())
+            {
+                s.RequestedNewState = true;
+                s.SetState("Lukker");
+            }
+            Program.updateSlaves = true;
         }
 
         private string getSelectedAddr()
         {
-            return unitList.SelectedItems[0].Text;
+            string data = "";
+            try
+            {
+                data = unitList.SelectedItems[0].Text;
+            }
+            catch (Exception e)
+            {
+
+            }
+            return data;
         }
 
         private void åbenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Slave s = Program.GetSlaveByAddr(getSelectedAddr());
-            s.SetState("Åbner");
-            Program.WriteLog("Open cmd called on slave: " + s.Address + ".");
-            s.SendMessage(CMD.Open);
+            string addr = getSelectedAddr();
+            if (addr != "")
+            {
+                Slave s = Program.GetSlaveByAddr(getSelectedAddr());
+                s.RequestedNewState = true;
+                s.SetState("Åbner");
+                Program.updateSlaves = true;
+                Program.WriteLog("Open cmd called on slave: " + s.Address + ".");
+                s.SendMessage(CMD.Open);
+            }
         }
 
         private void lukDørToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Slave s = Program.GetSlaveByAddr(getSelectedAddr());
-            s.SetState("Lukker");
-            Program.WriteLog("Close cmd called on slave: " + s.Address + ".");
-            s.SendMessage(CMD.Close);
+            string addr = getSelectedAddr();
+            if (addr != "")
+            {
+                Slave s = Program.GetSlaveByAddr(getSelectedAddr());
+                s.RequestedNewState = true;
+                s.SetState("Lukker");
+                Program.updateSlaves = true;
+                Program.WriteLog("Close cmd called on slave: " + s.Address + ".");
+                s.SendMessage(CMD.Close);
+            }
         }
 
         private void opdaterStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Slave s = Program.GetSlaveByAddr(getSelectedAddr());
-            Program.WriteLog("Status cmd called on slave: " + s.Address + ".");
-            s.SendMessage(CMD.Status);
-            _lastSlave = s;
+            string addr = getSelectedAddr();
+            if (addr != "")
+            {
+                Slave s = Program.GetSlaveByAddr(getSelectedAddr());
+                Program.WriteLog("Status cmd called on slave: " + s.Address + ".");
+                s.SendMessage(CMD.Status);
+                _lastSlave = s;
+            }
         }
 
         private void slaveUpdateTimer_Tick(object sender, EventArgs e)
@@ -181,8 +222,11 @@ namespace prisonSystem
 
         private void slaveStatusTimer_Tick(object sender, EventArgs e)
         {
-            if (!Program.masterReady)
+            if (Program.mode != 7)
                 return;
+
+            //if (!Program.masterReady)
+            //    return;
 
             Slave s = Program.GetSlaves().First();
             if (s.ReadyNextMsg())
@@ -194,15 +238,19 @@ namespace prisonSystem
 
         private void commandQueueTimer_Tick(object sender, EventArgs e)
         {
+            if (Program.mode != 7)
+                return;
+
             if (Program.commandqueue.Count == 0)
                 return;
 
-            if (!Program.masterReady)
-            {
-                Program.WriteLog("Master not ready");
-                return;
-            }
+            //if (!Program.masterReady)
+            //{
+            //    Program.WriteLog("Master not ready");
+            //    return;
+            //}
 
+            //if (Program.GetSlaves().First().ReadyNextMsg())
             Program.GetSerial().SendData( Program.commandqueue.Pop() );
         }
     }

@@ -43,11 +43,11 @@ namespace prisonSystem
             if (!_port.IsOpen)
                 return;
 
-            if (!Program.masterReady)
-            {
-                Program.WriteLog("Trying to send, but master isnt ready.");
-                return;
-            }
+            //if (!Program.masterReady)
+            //{
+            //    Program.WriteLog("Trying to send, but master isnt ready.");
+            //    return;
+            //}
 
             byte[] buffer = Encoding.ASCII.GetBytes(data + (char)13);
             _port.Write(buffer, 0, buffer.Length);
@@ -74,7 +74,7 @@ namespace prisonSystem
                 }
                 else
                 {
-                    _buffer.Append( ((char)_char).ToString());
+                    _buffer.Append(((char)_char).ToString());
                 }
             }
         }

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prisonSystem", "prisonSystem\prisonSystem.csproj", "{EF254F3A-463C-4C55-80EB-255DC06C1344}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "uml", "uml\uml.modelproj", "{604D8766-1DC3-4F29-8BDC-210E750E1699}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{EF254F3A-463C-4C55-80EB-255DC06C1344}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF254F3A-463C-4C55-80EB-255DC06C1344}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF254F3A-463C-4C55-80EB-255DC06C1344}.Release|Any CPU.Build.0 = Release|Any CPU
+		{604D8766-1DC3-4F29-8BDC-210E750E1699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{604D8766-1DC3-4F29-8BDC-210E750E1699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{604D8766-1DC3-4F29-8BDC-210E750E1699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{604D8766-1DC3-4F29-8BDC-210E750E1699}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
