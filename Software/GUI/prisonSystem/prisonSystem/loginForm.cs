@@ -27,6 +27,7 @@ namespace prisonSystem
 
         private void testBtn_Click(object sender, EventArgs e)
         {
+            Program.mode = 7;
             openMainWindow();
              
         }

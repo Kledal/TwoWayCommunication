@@ -12,4 +12,5 @@ void SendInteger(int Tal);
 
 extern unsigned char uart_data[17];
 extern int uart_count;
+extern int changeStatus;
 /**************************************/

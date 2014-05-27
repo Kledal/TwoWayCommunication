@@ -20,17 +20,18 @@ namespace prisonSystem
 
         static public string publicAddress = "10101010";
 
+        static public bool masterReady = true;
+        static public Stack<string> commandqueue;
+
         static public int mode = 0;
         static public bool updateSlaves = false;
 
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             _log = new List<string>();
             _slaves = new List<Slave>();
+            commandqueue = new Stack<string>();
 
             _slaves.Add(new Slave("11001100", "Test slave", "Ikke tilgængelig"));
 

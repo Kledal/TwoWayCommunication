@@ -14,7 +14,6 @@ namespace prisonSystem
 
         public delegate void dataReceived(object source, string data);
         public event dataReceived DataReceived;
-
         private StringBuilder _buffer = new StringBuilder();
 
         public Serial(string comport = "COM5")
@@ -44,10 +43,22 @@ namespace prisonSystem
             if (!_port.IsOpen)
                 return;
 
+            //if (!Program.masterReady)
+            //{
+            //    Program.WriteLog("Trying to send, but master isnt ready.");
+            //    return;
+            //}
+
             byte[] buffer = Encoding.ASCII.GetBytes(data + (char)13);
             _port.Write(buffer, 0, buffer.Length);
 
             Program.WriteLog("Data transmitted via serial: " + data);
+            Program.masterReady = false;
+        }
+
+        public void SendPublicData(CMD command)
+        {
+            Program.commandqueue.Push(Program._commands[(int)CMD.StartBit] + Program.publicAddress + Program._commands[(int)command]);
         }
 
         void _port_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -63,7 +74,7 @@ namespace prisonSystem
                 }
                 else
                 {
-                    _buffer.Append( ((char)_char).ToString());
+                    _buffer.Append(((char)_char).ToString());
                 }
             }
         }
