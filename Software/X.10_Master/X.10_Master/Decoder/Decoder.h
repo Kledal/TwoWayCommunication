@@ -22,7 +22,7 @@ unsigned char cmdbit[4];
 unsigned char startbits[4];
 
 // Serial Master-to-PC variable
-char endByte;
+extern char endByte;
 int max_zero_cross;
 int zero_cross;
 

@@ -22,6 +22,7 @@
 */
 unsigned char uart_data[17] = "";
 int uart_count = 0;
+int changeStatus = 0;
 
 // Constants
 #define XTAL 3686400
@@ -160,39 +161,45 @@ ISR(USART_RXC_vect)
     {
       case 'O':
         SendString("O");
+		SendChar((char)13);
         isHandled = 1;
       break;
       case 'S':
          if (getPwStatus()) {
            SendString("K");
-           SendChar(endbyte);
+           SendChar((char)13);
          }else if (!getLoginStatus()){
           SendString("I");
-          SendChar(endbyte);
+          SendChar((char)13);
         }else if(getLoginStatus()){
           SendString("L");
-          SendChar(endbyte);
+          SendChar((char)13);
         }
         isHandled = 1;
       break;
     }
+	
+	if (isHandled) {
+		sendReadyCommand();
+	}
 
     if (!isHandled) {
-      clearArray(sendInfo);
+      clearArray(sendInfo, 17);
       // Load uart data into sendinfo array.
       int i;
         for(i = 0;i<sizeof(sendInfo);i++) {
           sendInfo[i] = uart_data[i];
         }
-        if (sendInfo[14] == '1' && sendInfo[17] == '1')
+        if (sendInfo[14] == '1' && sendInfo[16] == '1') {
             changeStatus = 1;
+		}			
 
       uart_count = 0;
       sendCount = 0;
       isSending = 1;
     }
     // Clear uart_data.
-    clearArray(uart_data);
+    clearArray(uart_data, 17);
   }
 }
 

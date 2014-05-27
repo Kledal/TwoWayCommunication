@@ -8,10 +8,12 @@
 #include "Serial/serial.h"
 #include "Array_manipulation/Array_manipulation.h"
 
+
 /*
  Define main.c functions
 */
 void initInterrupts();
+void sendReadyCommand();
 
 /*
 	IO Mapping (STK-500):
@@ -39,9 +41,13 @@ int main(void)
     while(1)
     {
     	while(!okPw()) {}
-			while(!okLogin()) {}
-
+		while(!okLogin()) {}
     }
+}
+
+void sendReadyCommand() {
+	SendString("R");
+	SendChar(endByte);
 }
 
 void initInterrupts() {
@@ -55,13 +61,12 @@ void initInterrupts() {
  This method is for the zero cross detection.
 */
 ISR(INT1_vect) {
-
 	if (isSending) {
 		unsigned char bit = sendInfo[sendCount];
 		//we need to check against string, because that is what we are receiving over
 		if (bit == '1')
 			sendData();
-
+			
 		sendCount++;
 		if (sendCount > sizeof(sendInfo))
 		{
@@ -69,6 +74,8 @@ ISR(INT1_vect) {
 			if (changeStatus) {
 				isListening = 1;
 				changeStatus = 0;
+			}else{ // we are not changing status, send K back to tell we are done sending.
+				//sendReadyCommand();
 			}
 		}
 	}

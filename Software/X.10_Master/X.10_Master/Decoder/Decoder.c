@@ -14,7 +14,7 @@ unsigned char arraySizeCounter = 0;
 char endByte = 13;
 
 // Number of zero cross without startbit, before quitting listning mode
-int max_zero_cross = 30;
+int max_zero_cross = 50;
 int zero_cross = 0;
 
 // Loading arrays
@@ -35,7 +35,8 @@ void readDataBit() {
 
 	loadingBit = (PINA & 0b00000001);
 
-	/*SendInteger(loadingBit);*/
+	//SendInteger(loadingBit);
+	//SendChar( (char)13 );
 	
 	if (isLoadingStartArray) {
 		loadShiftLeft(startbit, loadingBit, 4);
@@ -91,7 +92,7 @@ void runCommand() {
 	int i;
 	
 	SendString("S:");
-	for (i=0; i< sizeof(cmdbit); i++)
+	for (i=0; i<4; i++)
 		SendInteger(cmdbit[i]);
 	
 	SendChar(endByte);
@@ -105,8 +106,7 @@ void resetListening() {
 	zero_cross = 0;
 	isListening = 0;
 	
-	SendString("K");
-	SendChar(endByte);
+	sendReadyCommand();
 }
 
 char getListening() {
